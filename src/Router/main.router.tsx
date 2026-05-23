@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import App from "../App";
-import Panel from "../Features/Notices/Pages/Panel.page";
+import Window from "../Features/Notices/Pages/Window.page";
 
 
 const ROUTER = createBrowserRouter([
@@ -9,8 +9,8 @@ const ROUTER = createBrowserRouter([
         Component: App,
     },
     {
-        path: "/panel",
-        Component: Panel,
+        path: "/window",
+        Component: Window,
     }
 ]);
 

@@ -1,16 +1,19 @@
-    .notice-card {
+.notice-card {
   background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(18, 22, 33, 0.08);
   padding: 16px;
-      margin: 12px 0;
+  margin: 12px 0;
+  width: auto; /* shrink to content */
   max-width: 720px;
+  box-sizing: border-box;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
   display: flex;
   flex-direction: column;
-      cursor: grab;
-      user-select: none;
-      touch-action: none;
+  align-self: flex-start; /* respect content width inside column */
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
 }
 
 .notice-card:hover {

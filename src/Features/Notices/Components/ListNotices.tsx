@@ -7,22 +7,33 @@ export function ListNotices() {
   const { data: notices, isLoading, error, isSuccess } = useGetAllNotice();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="notices-page">
+        <div className="notices-state notices-loading">Loading…</div>
+      </div>
+    );
   }
   
   if (error) {
-    return <div>Error loading notices</div>;
+    return (
+      <div className="notices-page">
+        <div className="notices-state notices-error">Error loading notices</div>
+      </div>
+    );
   }
 
-  if (isSuccess) {
-    console.log("Notices:", notices);
+  if (notices?.length === 0) {
+    return (
+      <div className="notices-page">
+        <div className="notices-state notices-empty">No notices available</div>
+      </div>
+    );
   }
 
   return (
     <>
       {isSuccess && (
         <div className="notices-page">
-          <h1>Notices</h1>
           <div className="notices-list">
             {notices?.map((notice) => (
               <Note key={notice.id} {...notice} />

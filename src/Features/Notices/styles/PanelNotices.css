@@ -1,0 +1,71 @@
+/* PanelNotices - GNOME/Adwaita inspired styles */
+:root{
+    --panel-bg: #ffffff;
+    --muted: #6e6e6e;
+    --text: #2c2c2c;
+    --accent: #3465a4;
+    --radius: 10px;
+}
+
+.panel-notices{
+    width: 100%;
+    background: var(--panel-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.panel-notices{
+    flex: 1 1 auto;
+    min-height: 0; /* allow flex children to scroll */
+}
+
+.panel-header{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.panel-title{
+    font-family: Cantarell, "Segoe UI", Roboto, Arial, sans-serif;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.add-button{
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--accent);
+    cursor: pointer;
+    transition: background .12s ease, transform .06s ease;
+}
+
+.add-button:hover{
+    background: rgba(52,101,164,0.06);
+}
+
+.notice-list{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+}
+
+.panel-footer{
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+@media (max-width:640px){
+    .panel-notices{ padding: 10px }
+    .panel-title{ font-size: 1rem }
+}
