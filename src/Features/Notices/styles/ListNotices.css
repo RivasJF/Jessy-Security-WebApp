@@ -1,0 +1,21 @@
+.notices-page {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.notices-page h1 {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  color: #0f1724;
+}
+
+.notices-list {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

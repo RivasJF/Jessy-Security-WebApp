@@ -1,5 +1,6 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, type AxiosResponse } from "axios";
 import type { ApiErrorResponse } from "./Dto/ApiErrorResponse.dto";
+import type { ApiResponse } from "./Dto/ApiResponse.dto";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -9,8 +10,8 @@ const api = axios.create({
 });
 
 api.interceptors.response.use(
-  (response) => {
-    return response.data;
+  (response: AxiosResponse<ApiResponse<unknown>>) => {
+    return response;
   },
     (error: AxiosError<ApiErrorResponse>) => {
       //console.error("API Error:", error.response?.data);
