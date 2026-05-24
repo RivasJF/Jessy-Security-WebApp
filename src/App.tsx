@@ -9,7 +9,7 @@ function App() {
         <NavLink to="/window">Go to Panel</NavLink>
       </nav>
       <section>
-        <h1>Just Do it!!</h1>
+        <h1 className="text-4xl font-bold text-blue-500">Just Do it!!</h1>
       </section>
     </>
   );
