@@ -1,8 +1,11 @@
 @import 'tailwindcss';
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: 'aui-monospace', SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+body{
+    background-color: #222222;
+    color: aliceblue;
 }

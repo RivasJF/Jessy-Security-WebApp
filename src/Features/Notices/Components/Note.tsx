@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import type { Notice } from '../../../Api/Notices/notices.v1'
-import '../styles/Note.css'
+// estilos migrados a TailwindCSS — eliminar archivo CSS correspondiente
 
 export default function Note(notice: Notice) {
   const { id, message } = notice;
@@ -9,6 +9,10 @@ export default function Note(notice: Notice) {
   const offsetRef = useRef({ x: 0, y: 0 })
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const [dragging, setDragging] = useState(false)
+
+  const baseClasses =
+    'bg-gradient-to-b from-white to-[#fbfbff] rounded-[12px] shadow-lg p-4 my-3 w-auto max-w-[720px] flex flex-col self-start select-none transform transition-transform duration-150'
+  const hoverClasses = dragging ? '' : 'hover:-translate-y-1 hover:shadow-2xl'
 
   useEffect(() => {
     // place the dialog where it currently is in the layout
@@ -52,13 +56,13 @@ export default function Note(notice: Notice) {
   return (
     <dialog
       ref={elRef}
-      className={`notice-card ${dragging ? 'grabbing' : ''}`}
+      className={`${baseClasses} ${dragging ? 'cursor-grabbing' : 'cursor-grab'} ${hoverClasses}`}
       data-id={id}
       style={{ position: 'absolute', left: pos.x, top: pos.y, touchAction: 'none' }}
       onPointerDown={handlePointerDown}
     >
-      <div className="notice-content">
-        <h2 className="notice-title">{message}</h2>
+      <div className="pb-1.5">
+        <h2 className="font-bold">{message}</h2>
       </div>
     </dialog>
   )

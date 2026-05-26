@@ -1,17 +1,19 @@
-import "../styles/Windows.css";
 import DeskNotice from "./PanelNotices.page";
 
 export default function Window() {
   return (
-    <div className="window-page">
-      <header className="window-header">
-        <nav className="window-nav">
-          <div className="window-article">
-            <a href="/window" className="window-link">X</a>
-          </div>
+    <div className="min-h-screen w-screen flex flex-col">
+      <header className="w-full">
+        <nav className="flex w-full">
+          <a href="/window" className="text-gray-600 hover:text-gray-800 text-lg font-medium">
+            X
+          </a>
         </nav>
       </header>
-      <DeskNotice />
+
+      <div className="flex-1 w-full">
+        <DeskNotice />
+      </div>
     </div>
   );
 }

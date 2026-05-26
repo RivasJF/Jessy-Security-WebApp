@@ -1,6 +1,5 @@
 import  useGetAllNotice from "../hooks/UseAllNotice.hook";
 import Note from "./Note";
-import "../styles/ListNotices.css";
 
 export function ListNotices() {
 
@@ -8,24 +7,24 @@ export function ListNotices() {
 
   if (isLoading) {
     return (
-      <div className="notices-page">
-        <div className="notices-state notices-loading">Loading…</div>
+      <div className="p-2">
+        <div>Loading…</div>
       </div>
     );
   }
   
   if (error) {
     return (
-      <div className="notices-page">
-        <div className="notices-state notices-error">Error loading notices</div>
+      <div className="p-2">
+        <div>Error loading notices</div>
       </div>
     );
   }
 
   if (notices?.length === 0) {
     return (
-      <div className="notices-page">
-        <div className="notices-state notices-empty">No notices available</div>
+      <div className="p-2">
+        <div>No notices available</div>
       </div>
     );
   }
@@ -33,8 +32,8 @@ export function ListNotices() {
   return (
     <>
       {isSuccess && (
-        <div className="notices-page">
-          <div className="notices-list">
+        <div className="p-2">
+          <div className="">
             {notices?.map((notice) => (
               <Note key={notice.id} {...notice} />
             ))}
