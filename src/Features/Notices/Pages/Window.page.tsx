@@ -1,3 +1,4 @@
+import FormNotice from "../Components/FormNotice";
 import DeskNotice from "./PanelNotices.page";
 
 export default function Window() {
@@ -12,7 +13,8 @@ export default function Window() {
       </header>
 
       <div className="flex-1 w-full">
-        <DeskNotice />
+        {/* <DeskNotice /> */}
+        <FormNotice />
       </div>
     </div>
   );
