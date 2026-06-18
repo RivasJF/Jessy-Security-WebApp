@@ -1,6 +1,6 @@
 import axios, { AxiosError, type AxiosResponse } from "axios";
-import type { ApiErrorResponse } from "./Dto/ApiErrorResponse.dto";
-import type { ApiResponse } from "./Dto/ApiResponse.dto";
+import type { ApiErrorResponse } from "../Shared/Types/Api/ApiErrorResponse.dto";
+import type { ApiResponse } from "../Shared/Types/Api/ApiResponse.dto";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -14,7 +14,6 @@ api.interceptors.response.use(
     return response;
   },
     (error: AxiosError<ApiErrorResponse>) => {
-      //console.error("API Error:", error.response?.data);
         return Promise.reject(error);
     }
 );
