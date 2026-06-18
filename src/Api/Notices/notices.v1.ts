@@ -1,5 +1,5 @@
 import api from "../api";
-import type { ApiResponse } from "../Dto/ApiResponse.dto";
+import type { ApiResponse } from "../../Shared/Types/Api/ApiResponse.dto";
 
 const API_BASE_URL = "/notice";
 

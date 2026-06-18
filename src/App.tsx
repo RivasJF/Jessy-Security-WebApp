@@ -1,17 +1,35 @@
 import { NavLink } from "react-router";
 
+const path = "</>";
 
 function App() {
   return (
-    <>
+    <div className="h-screen overflow-hidden flex flex-col">
       <nav className="flex justify-around items-center p-3">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/window">Go to Panel</NavLink>
+        <NavLink to="/" className="text-lg font-bold hover:text-green-500">
+          {path}
+        </NavLink>
+        <NavLink to="/login" className="text-lg font-bold hover:text-green-500">
+          Login || Register
+        </NavLink>
       </nav>
-      <section className="p-4 flex justify-center items-center min-h-screen">
-        <h1 className="text-4xl font-bold text-blue-500">Just Do it!!</h1>
+      <section className="p-4 flex flex-col">
+        <section className="p-4 rounded-lg mb-6">
+          <p className="text-lg text-gray-600">Welcome to</p>
+          <h1 className="text-4xl font-bold text-green-500">Jessy Security</h1>
+        </section>
+
+        <section className="p-4 rounded-lg mb-6 flex items-center justify-center">
+          <div className="bg-gray-100 rounded-lg text-center p-6">
+            <p className="text-black">Your trusted security solution</p>
+            <p className="text-gray-500">Protecting your digital world with confidence</p>
+          </div>
+        </section>
       </section>
-    </>
+      <footer className="p-4 text-center text-gray-500">
+        <p>@RivasJF</p>
+      </footer>
+    </div>
   );
 }
 
