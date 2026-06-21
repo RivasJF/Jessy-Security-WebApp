@@ -17,7 +17,9 @@ export function encript(text: string, key: string, nonce: Uint8Array) {
     return bytesToHex(encrypted);
 }
 
-
+export function bytesToHexString(bytes: Uint8Array) {
+    return bytesToHex(bytes).toString();
+}
 
 export function decript(encrypted: string, key: string, nonce: Uint8Array) {
     const keyBytes = hexToBytes(key);

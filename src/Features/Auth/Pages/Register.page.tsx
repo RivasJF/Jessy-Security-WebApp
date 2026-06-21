@@ -1,13 +1,16 @@
 import { NavLink } from "react-router";
+import { useRegisterForm } from "../hooks/useRegisterForm";
 
 export default function Register() {
+  const { formData, handleChange, handleSubmit } = useRegisterForm();
+
   return (
     <section className="flex h-screen items-center justify-center">
       <div className="w-full max-w-md rounded-lg bg-zinc-50 p-8 shadow-lg">
         <h2 className="mb-6 text-center text-2xl font-bold text-black">
           Register
         </h2>
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
@@ -18,6 +21,9 @@ export default function Register() {
             <input
               type="email"
               id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               className="mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
             />
           </div>
@@ -31,6 +37,9 @@ export default function Register() {
             <input
               type="password"
               id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
               className="mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
             />
           </div>
@@ -46,7 +55,11 @@ export default function Register() {
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{" "}
-            <NavLink replace to="/login" className="text-green-500 hover:underline">
+            <NavLink
+              replace
+              to="/login"
+              className="text-green-500 hover:underline"
+            >
               Login here
             </NavLink>
           </p>

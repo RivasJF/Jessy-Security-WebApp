@@ -1,6 +1,9 @@
 import { NavLink } from "react-router";
+import { useRegisterForm } from "../hooks/useLoginForm";
 
 export default function Login() {
+  const { formData, handleChange, handleSubmit } = useRegisterForm();
+
   return (
     <section className="flex h-screen items-center justify-center">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
@@ -8,7 +11,7 @@ export default function Login() {
           Login
         </h2>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
@@ -19,6 +22,9 @@ export default function Login() {
             <input
               type="email"
               id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               className="mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
             />
           </div>
@@ -32,6 +38,9 @@ export default function Login() {
             <input
               type="password"
               id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
               className="mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
             />
           </div>
