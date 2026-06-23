@@ -28,3 +28,7 @@ export function decript(encrypted: string, key: string, nonce: Uint8Array) {
     const decrypted = cipher.decrypt(encryptedBytes);
     return new TextDecoder().decode(decrypted);
 }
+
+export function stringHexToBytes(hexString: string): Uint8Array {
+    return hexToBytes(hexString);
+}

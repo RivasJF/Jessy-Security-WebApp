@@ -9,13 +9,17 @@ export namespace UserApiTypes {
 
     export type LoginUserRequest = {
         email: string;
-        password: string;
-        salt: string;
+        publicKey: string;
     };
 
     export type UserResponse = {
         id: number;
         username: string;
         email: string;
+    };
+
+    export type SaltResponse = {
+        email: string;
+        salt: string;
     };
 }

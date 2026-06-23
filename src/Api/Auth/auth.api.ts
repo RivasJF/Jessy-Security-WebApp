@@ -19,3 +19,8 @@ export const fetchRefreshToken = async () => {
     const response = await api.post<ApiResponse<TokenApi.TokenResponse>>(`${API_BASE_URL}/refresh`);
     return response.data.data;
 }
+
+export const fetchSalt = async (email: string) => {
+    const response = await api.get<ApiResponse<UserApiTypes.SaltResponse>>(`${API_BASE_URL}/salt/${email}`);
+    return response.data.data;
+}
