@@ -3,8 +3,8 @@ export namespace UserApiTypes {
     export type RegisterUserRequest = {
         username: string;
         email: string;
-        password: string;
-        salt: string;
+        publicKey: string;
+        publicSalt: string;
     };
 
     export type LoginUserRequest = {

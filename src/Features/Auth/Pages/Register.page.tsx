@@ -13,6 +13,22 @@ export default function Register() {
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              className="mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
+            />
+          </div>
+          <div>
+            <label
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >

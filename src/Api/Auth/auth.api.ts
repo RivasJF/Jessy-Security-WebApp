@@ -1,7 +1,7 @@
-import type { ApiResponse } from "../Shared/Types/Api/ApiResponse.dto";
-import type { TokenApi } from "../Shared/Types/Domain/Token-api.types";
-import type { UserApiTypes } from "../Shared/Types/Domain/User-api.types";
-import api from "./api";
+import type { ApiResponse } from "../../Shared/Types/Api/ApiResponse.dto";
+import type { TokenApi } from "../../Shared/Types/Domain/Token-api.types";
+import type { UserApiTypes } from "../../Shared/Types/Domain/auth/User-api.types";
+import api from "../api";
 
 const API_BASE_URL = "/auth";
 

@@ -1,8 +1,24 @@
+import { useEffect } from "react";
 import { NavLink } from "react-router";
+import { fetchHelloWorld } from "./Api/HelloWorld/helloWorld.api";
 
 const path = "</>";
 
 function App() {
+
+  async function fetchData() {
+    try {
+      const result = await fetchHelloWorld();
+      console.log(result);
+    } catch (error) {
+      console.error("Error fetching Hello World:", error);
+    }
+  }
+  
+  useEffect( () => {
+    fetchData();
+  }, []);
+
   return (
     <div className="h-screen overflow-hidden flex flex-col">
       <nav className="flex justify-around items-center p-3">
