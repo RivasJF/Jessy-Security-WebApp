@@ -4,33 +4,39 @@ import Window from "../Features/Notices/Pages/Window.page";
 import Login from "../Features/Auth/Pages/Login.page";
 import Register from "../Features/Auth/Pages/Register.page";
 import Test from "../Features/Auth/Pages/Test.page";
-
+import ProtectedRouter from "./protected.router";
 
 const ROUTER = createBrowserRouter([
-    {
-        path: "/",
-        Component: App,
-    },
-    {
-        path: "/login",
-        Component: Login,
-    },
-    {
-        path: "/register",
-        Component: Register,
-    },
-    {
+  {
+    path: "/",
+    Component: App,
+  },
+  {
+    path: "/login",
+    Component: Login,
+  },
+  {
+    path: "/register",
+    Component: Register,
+  },
+  {
+    element: <ProtectedRouter />,
+    children: [
+      {
         path: "/window",
         Component: Window,
-    },
-    {
+      },
+      {
         path: "/test",
         Component: Test,
-    },
-    {
-        path: "*",
-        Component: () => <h1>404 Not Found</h1>,
-    }
+      },
+    ],
+  },
+
+  {
+    path: "*",
+    Component: () => <h1>404 Not Found</h1>,
+  },
 ]);
 
 export default ROUTER;
