@@ -4,6 +4,7 @@ import type { ApiResponse } from "../Shared/Types/Api/ApiResponse.dto";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api",
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },

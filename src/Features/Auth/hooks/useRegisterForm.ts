@@ -6,8 +6,11 @@ import { fetchRegisterUser } from "../../../Api/Auth/auth.api";
 import type { UserApiTypes } from "../../../Shared/Types/Domain/auth/User-api.types";
 import type { AxiosError } from "axios";
 import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
+import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 
 export function useRegisterForm() {
+  const { setAccessToken, setPrivateKey, setIsAuthenticated } = useAuthenticatedStore();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -26,7 +29,8 @@ export function useRegisterForm() {
     const keys = await generateKeyPair(passwordHash);
 
     // to stored
-    // - secretKey: keys.secretKey 
+    // - secretKey: keys.secretKey
+    setPrivateKey(keys.secretKey);
 
     // to  Backend
     console.log({
@@ -41,7 +45,9 @@ export function useRegisterForm() {
       publicSalt: bytesToHexString(salt)
     }
     console.log("Register data to send to backend:", registerData);
-    await fetchSaveToBackend(registerData);
+    const response = await fetchSaveToBackend(registerData);
+    setAccessToken(response.accessToken);
+    setIsAuthenticated(true);
   };
 
   return { formData, handleChange, handleSubmit };
@@ -51,8 +57,10 @@ async function fetchSaveToBackend(data: UserApiTypes.RegisterUserRequest) {
     try {
       const response = await fetchRegisterUser(data)
       console.log("User registered successfully:", response);
+      return response;
     }
     catch (error: AxiosError<ApiErrorResponse> | any) {
       console.error("Error registering user:", error.response?.data || error.message);
+      throw error;
     }
   }

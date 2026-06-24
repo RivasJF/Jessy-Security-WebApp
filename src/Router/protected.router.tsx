@@ -1,8 +1,9 @@
 import { Outlet } from "react-router";
+import { useAuthenticatedStore } from "../Store/Authenticated.store";
 
 
 export default function ProtectedRouter() {
-    const isAuthenticated = false; // Replace with your authentication logic
+    const { isAuthenticated } = useAuthenticatedStore();
 
     if (!isAuthenticated) {
         return <h1>Access Denied</h1>;

@@ -1,8 +1,14 @@
-import { NavLink } from "react-router";
-import { useRegisterForm } from "../hooks/useLoginForm";
+import { Navigate, NavLink } from "react-router";
+import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
+import { useLoginForm } from "../hooks/useLoginForm";
 
 export default function Login() {
-  const { formData, handleChange, handleSubmit } = useRegisterForm();
+  const { formData, handleChange, handleSubmit } = useLoginForm();
+  const { isAuthenticated } = useAuthenticatedStore();
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace/>;
+  }
 
   return (
     <section className="flex h-screen items-center justify-center">

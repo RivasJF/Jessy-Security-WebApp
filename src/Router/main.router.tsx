@@ -5,6 +5,7 @@ import Login from "../Features/Auth/Pages/Login.page";
 import Register from "../Features/Auth/Pages/Register.page";
 import Test from "../Features/Auth/Pages/Test.page";
 import ProtectedRouter from "./protected.router";
+import Dashboard from "../Features/Accounts/Dashboard.page";
 
 const ROUTER = createBrowserRouter([
   {
@@ -27,11 +28,15 @@ const ROUTER = createBrowserRouter([
         Component: Window,
       },
       {
+        path: "/dashboard",
+        Component: Dashboard,
+      }
+    ],
+  },
+        {
         path: "/test",
         Component: Test,
       },
-    ],
-  },
 
   {
     path: "*",

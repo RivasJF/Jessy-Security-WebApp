@@ -4,9 +4,13 @@ import { generateKeyPair } from "../../../Shared/Encoder/keys";
 import type { UserApiTypes } from "../../../Shared/Types/Domain/auth/User-api.types";
 import { fetchLoginUser, fetchSalt } from "../../../Api/Auth/auth.api";
 import { stringHexToBytes } from "../../../Shared/Encoder/cypher";
-import type { TokenApi } from "../../../Shared/Types/Domain/Token-api.types";
+import type { TokenResponse } from "../../../Shared/Types/Domain/Token-api.types";
+import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 
-export function useRegisterForm() {
+export function useLoginForm() {
+
+    const { setAccessToken, setPrivateKey, setIsAuthenticated } = useAuthenticatedStore();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,11 +32,17 @@ export function useRegisterForm() {
     const passwordHash = await hashPassword(formData.password, salt);
     const keys = await generateKeyPair(passwordHash);
 
+    // to stored
+    // - secretKey: keys.secretKey
+    setPrivateKey(keys.secretKey);
+
     // fetch login {email, publicKey}
-    const tokens: TokenApi.TokenResponse = await fetchLoginApi({
+    const tokens: TokenResponse = await fetchLoginApi({
       email: formData.email,
       publicKey: keys.publicKey,
     });
+    setAccessToken(tokens.accessToken);
+    setIsAuthenticated(true);
 
     console.log(formData);
     console.log(tokens);
@@ -51,7 +61,7 @@ async function fetchSaltApi(email:string):Promise<UserApiTypes.SaltResponse> {
   }
 };
 
-async function fetchLoginApi(data: UserApiTypes.LoginUserRequest): Promise<TokenApi.TokenResponse> {
+async function fetchLoginApi(data: UserApiTypes.LoginUserRequest): Promise<TokenResponse> {
   try {
     const response = await fetchLoginUser(data);
     return response;
