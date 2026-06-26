@@ -3,10 +3,11 @@ import { useAuthenticatedStore } from "../Store/Authenticated.store";
 
 
 export default function ProtectedRouter() {
-    const { isAuthenticated } = useAuthenticatedStore();
+    const { isAuthenticated, setIsAuthenticated } = useAuthenticatedStore();
 
     if (!isAuthenticated) {
-        return <h1>Access Denied</h1>;
+        return <><h1>Access Denied</h1><button onClick={() => setIsAuthenticated(true)}>Login</button></>
+        ;
     }
 
     return <Outlet />;
