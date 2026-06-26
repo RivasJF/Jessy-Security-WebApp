@@ -3,7 +3,7 @@ import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 import { useLoginForm } from "../hooks/useLoginForm";
 
 export default function Login() {
-  const { formData, handleChange, handleSubmit } = useLoginForm();
+  const { formData, handleChange, handleSubmit , error, isLoading } = useLoginForm();
   const { isAuthenticated } = useAuthenticatedStore();
 
   if (isAuthenticated) {
@@ -16,7 +16,6 @@ export default function Login() {
         <h2 className="mb-6 text-center text-2xl font-bold text-black">
           Login
         </h2>
-
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
@@ -55,11 +54,13 @@ export default function Login() {
             <button
               type="submit"
               className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+              disabled={isLoading}
             >
               Login
             </button>
           </div>
         </form>
+        <span className="text-red-500 text-sm mt-2">{error}</span>
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{" "}

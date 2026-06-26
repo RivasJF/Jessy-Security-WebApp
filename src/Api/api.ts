@@ -15,7 +15,8 @@ api.interceptors.response.use(
     return response;
   },
     (error: AxiosError<ApiErrorResponse>) => {
-        return Promise.reject(error);
+      const errorApi = error as AxiosError<ApiErrorResponse>;
+        return Promise.reject(errorApi);
     }
 );
 

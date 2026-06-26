@@ -6,15 +6,20 @@ import { fetchLoginUser, fetchSalt } from "../../../Api/Auth/auth.api";
 import { stringHexToBytes } from "../../../Shared/Encoder/cypher";
 import type { TokenResponse } from "../../../Shared/Types/Domain/Token-api.types";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
+import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
+import type { AxiosError } from "axios";
 
 export function useLoginForm() {
-
-    const { setAccessToken, setPrivateKey, setIsAuthenticated } = useAuthenticatedStore();
+  const { setAccessToken, setPrivateKey, setIsAuthenticated } =
+    useAuthenticatedStore();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,49 +29,40 @@ export function useLoginForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // fetch salt_F
-    const keysSalt: UserApiTypes.SaltResponse = await fetchSaltApi(formData.email);
-    const salt = stringHexToBytes(keysSalt.salt);
+    setLoading(true);
+    setError(null);
 
-    // create valid keys
-    const passwordHash = await hashPassword(formData.password, salt);
-    const keys = await generateKeyPair(passwordHash);
+    try {
+      // fetch salt_F
+      const keysSalt: UserApiTypes.SaltResponse = await fetchSalt(formData.email);
+      const salt = stringHexToBytes(keysSalt.salt);
+      // create valid keys
+      const passwordHash = await hashPassword(formData.password, salt);
+      const keys = await generateKeyPair(passwordHash);
+      // to stored
+      // - secretKey: keys.secretKey
+      setPrivateKey(keys.secretKey);
+      // fetch login {email, publicKey}
+      const tokens: TokenResponse = await fetchLoginUser({
+        email: formData.email,
+        publicKey: keys.publicKey,
+      });
+      setAccessToken(tokens.accessToken);
+      setIsAuthenticated(true);
 
-    // to stored
-    // - secretKey: keys.secretKey
-    setPrivateKey(keys.secretKey);
-
-    // fetch login {email, publicKey}
-    const tokens: TokenResponse = await fetchLoginApi({
-      email: formData.email,
-      publicKey: keys.publicKey,
-    });
-    setAccessToken(tokens.accessToken);
-    setIsAuthenticated(true);
-
-    console.log(formData);
-    console.log(tokens);
+    } catch (error: AxiosError<ApiErrorResponse> | unknown) {
+      const errorApi = error as AxiosError<ApiErrorResponse>;
+      const status = errorApi.response?.status;
+      if ( status == 401 ) {
+        setError("Credenciales invalidas. Por favor, verifica tu correo electrónico y contraseña.");
+      } else{
+        setError("Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.");
+      }
+      throw errorApi;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return { formData, handleChange, handleSubmit };
-}
-
-async function fetchSaltApi(email:string):Promise<UserApiTypes.SaltResponse> {
-  try {
-    const response = await fetchSalt(email);
-    return response;
-  } catch (error) {
-    console.error("Error fetching salt:", error);
-    throw error;
-  }
-};
-
-async function fetchLoginApi(data: UserApiTypes.LoginUserRequest): Promise<TokenResponse> {
-  try {
-    const response = await fetchLoginUser(data);
-    return response;
-  } catch (error) {
-    console.error("Error fetching login:", error);
-    throw error;
-  }
+  return { formData, handleChange, handleSubmit, error, isLoading };
 }
