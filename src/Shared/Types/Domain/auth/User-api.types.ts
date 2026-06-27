@@ -17,9 +17,4 @@ export namespace UserApiTypes {
         username: string;
         email: string;
     };
-
-    export type SaltResponse = {
-        email: string;
-        salt: string;
-    };
 }
