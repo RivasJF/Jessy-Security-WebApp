@@ -10,6 +10,11 @@ export function generateRamdomKey24() {
     return key;
 }
 
+/*
+text: string clave to encript
+key: privatekey in hex format from 32 bytes
+nonce: random bytes 24 length
+*/
 export function encript(text: string, key: string, nonce: Uint8Array) {
     const keyBytes = hexToBytes(key);
     const cipher = xchacha20poly1305(keyBytes,nonce);
@@ -17,6 +22,7 @@ export function encript(text: string, key: string, nonce: Uint8Array) {
     return bytesToHex(encrypted);
 }
 
+//IUnit8Array to hex string
 export function bytesToHexString(bytes: Uint8Array) {
     return bytesToHex(bytes).toString();
 }

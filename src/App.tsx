@@ -25,6 +25,9 @@ function App() {
         <NavLink to="/" className="text-lg font-bold hover:text-green-500">
           {path}
         </NavLink>
+        <NavLink to="/dashboard" className="text-lg font-bold hover:text-green-500">
+          Dashboard
+        </NavLink>
         <NavLink to="/login" className="text-lg font-bold hover:text-green-500">
           Login || Register
         </NavLink>
