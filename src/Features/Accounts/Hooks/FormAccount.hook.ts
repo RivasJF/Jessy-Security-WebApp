@@ -2,8 +2,10 @@ import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import type { CategoryAccount } from "../../../Shared/Types/Domain/account/CategoryAccount.type";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 import type { AdditionalInformation, RegisterAccount } from "../../../Shared/Types/Domain/account/RegisterAccount.type";
-import type { AdditionalInformationType } from "../../../Shared/Types/Domain/account/AditionaInformation.type";
 import { encryptAdditionalInformation } from "../../../Shared/Utils/EncriptedAdditionalInformation";
+import { registerAccount } from "../../../Api/Account/account.v1";
+import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
+import type { AxiosError } from "axios";
 
 type Inputs = {
   title: string;
@@ -20,7 +22,7 @@ export type AdditionalInformationInput = {
 
 
 export const useFormAccount = () => {
-    const {privateKey} = useAuthenticatedStore();
+    const {privateKey, accessToken} = useAuthenticatedStore();
   const {
     control,
     register,
@@ -32,7 +34,7 @@ export const useFormAccount = () => {
     name: "additionalInformation",
   });
 
-  const onSubmit: SubmitHandler<Inputs> = data => {
+  const onSubmit: SubmitHandler<Inputs> = async data => {
     //encritar datos
 
     const additionalInformation: AdditionalInformation[] = encryptAdditionalInformation(data.additionalInformation, privateKey);
@@ -44,10 +46,9 @@ export const useFormAccount = () => {
       additionalInformation: additionalInformation,
     };
   
-    //send request
-    
-
-    console.log(payload, privateKey);
+    // Aquí puedes realizar la llamada a la API para registrar la cuenta con el payload encriptado
+    const response = await save(payload);
+    console.log("Response from API:", response);
   }
 
   return {
@@ -60,3 +61,16 @@ export const useFormAccount = () => {
     errors,
   }
 };
+
+
+async function save(payload:RegisterAccount) {
+  try {
+        const response = await registerAccount(payload);
+        console.log("User registered successfully:", response);
+        return response;
+      }
+      catch (error: AxiosError<ApiErrorResponse> | any) {
+        console.error("Error registering user:", error.response?.data || error.message);
+        throw error;
+      }
+}

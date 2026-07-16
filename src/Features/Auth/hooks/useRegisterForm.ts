@@ -46,7 +46,7 @@ export function useRegisterForm() {
     }
     console.log("Register data to send to backend:", registerData);
     const response = await fetchSaveToBackend(registerData);
-    setAccessToken(response.accessToken);
+    setAccessToken(response.access_token);
     setIsAuthenticated(true);
   };
 

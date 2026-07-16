@@ -1,6 +1,8 @@
-import axios, { AxiosError, type AxiosResponse } from "axios";
+import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
 import type { ApiErrorResponse } from "../Shared/Types/Api/ApiErrorResponse.dto";
 import type { ApiResponse } from "../Shared/Types/Api/ApiResponse.dto";
+import { useAuthenticatedStore } from "../Store/Authenticated.store";
+import type { TokensTypes } from "../Shared/Types/Domain/auth/Token.types";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -9,6 +11,22 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+api.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+
+  const accessToken = useAuthenticatedStore.getState().accessToken;
+
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  return config;
+},
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  }
+);
 
 api.interceptors.response.use(
   (response: AxiosResponse<ApiResponse<unknown>>) => {
@@ -20,4 +38,42 @@ api.interceptors.response.use(
     }
 );
 
+const refreshApi = axios.create({
+  baseURL: "http://localhost:3000/api",
+  withCredentials: true,
+  headers: { "Content-Type": "application/json" },
+});
+  
+api.interceptors.response.use(
+  (response:AxiosResponse<ApiResponse<unknown>>) => response,
+  async (error: AxiosError) => {
+    const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+
+    if (error.response?.status !== 401 || originalRequest._retry) {
+      return Promise.reject(error);
+    }
+
+    originalRequest._retry = true;
+
+    try {
+      const refreshResponse:AxiosResponse<ApiResponse<TokensTypes.TokenResponse>> = await refreshApi.post("/auth/refresh");
+      const newAccessToken = refreshResponse.data.data.access_token;
+
+      useAuthenticatedStore.getState().setAccessToken(newAccessToken);
+      originalRequest.headers = {
+        ...originalRequest.headers,
+        Authorization: `Bearer ${newAccessToken}`,
+      };
+
+      return api(originalRequest);
+    } catch (refreshError) {
+      useAuthenticatedStore.getState().setAccessToken("");
+      useAuthenticatedStore.getState().setIsAuthenticated(false);
+      useAuthenticatedStore.getState().setPrivateKey("");
+      return Promise.reject(refreshError);
+    }
+  }
+);
+
 export default api;
+

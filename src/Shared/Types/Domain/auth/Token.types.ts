@@ -4,7 +4,7 @@ export namespace TokensTypes {
     publicKey: string;
   };
   export type TokenResponse = {
-    accessToken: string;
+    access_token: string;
   };
   export type SaltResponse = {
     email: string;

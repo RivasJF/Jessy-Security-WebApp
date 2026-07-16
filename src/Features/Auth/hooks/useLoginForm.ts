@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { hashPassword } from "../../../Shared/Encoder/hash";
 import { generateKeyPair } from "../../../Shared/Encoder/keys";
-import type { UserApiTypes } from "../../../Shared/Types/Domain/auth/User-api.types";
 import { fetchLoginUser, fetchSalt } from "../../../Api/Auth/auth.api";
 import { stringHexToBytes } from "../../../Shared/Encoder/cypher";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
@@ -50,7 +49,7 @@ export function useLoginForm() {
     onSuccess: ({ token, keys }) => {
       // to stored
       setPrivateKey(keys.secretKey);
-      setAccessToken(token.accessToken);
+      setAccessToken(token.access_token);
       setIsAuthenticated(true);
     },
 
