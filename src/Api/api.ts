@@ -28,15 +28,15 @@ api.interceptors.request.use(
   }
 );
 
-api.interceptors.response.use(
-  (response: AxiosResponse<ApiResponse<unknown>>) => {
-    return response;
-  },
-    (error: AxiosError<ApiErrorResponse>) => {
-      const errorApi = error as AxiosError<ApiErrorResponse>;
-        return Promise.reject(errorApi);
-    }
-);
+// api.interceptors.response.use(
+//   (response: AxiosResponse<ApiResponse<unknown>>) => {
+//     return response;
+//   },
+//     (error: AxiosError<ApiErrorResponse>) => {
+//       const errorApi = error as AxiosError<ApiErrorResponse>;
+//         return Promise.reject(errorApi);
+//     }
+// );
 
 const refreshApi = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -49,7 +49,7 @@ api.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
-    if (error.response?.status !== 401 || originalRequest._retry) {
+    if (![401, 403].includes(error.response?.status ?? 0) || originalRequest._retry) {
       return Promise.reject(error);
     }
 

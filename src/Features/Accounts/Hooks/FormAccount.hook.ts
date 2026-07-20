@@ -22,7 +22,7 @@ export type AdditionalInformationInput = {
 
 
 export const useFormAccount = () => {
-    const {privateKey, accessToken} = useAuthenticatedStore();
+    const {privateKey} = useAuthenticatedStore();
   const {
     control,
     register,
@@ -66,11 +66,11 @@ export const useFormAccount = () => {
 async function save(payload:RegisterAccount) {
   try {
         const response = await registerAccount(payload);
-        console.log("User registered successfully:", response);
+        console.log("Account registered successfully:", response);
         return response;
       }
       catch (error: AxiosError<ApiErrorResponse> | any) {
-        console.error("Error registering user:", error.response?.data || error.message);
+        console.error("Error registering account:", error.response?.data || error.message);
         throw error;
       }
 }
