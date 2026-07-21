@@ -6,8 +6,8 @@ import type { RegisterAccount } from "../../Shared/Types/Domain/account/Register
 const API_BASE_URL = "/accounts";
 
 
-export const fetchNotices = async (): Promise<AccountListResponse[]> => {
-    const response = await api.get<ApiResponse<AccountListResponse[]>>(API_BASE_URL);
+export const fetchListAccounts = async (): Promise<AccountListResponse[]> => {
+    const response = await api.get<ApiResponse<AccountListResponse[]>>(`${API_BASE_URL}/list`);
     return response.data.data;
 }
 

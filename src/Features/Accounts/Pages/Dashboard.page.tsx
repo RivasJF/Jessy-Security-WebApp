@@ -1,72 +1,83 @@
 import { NavLink } from "react-router";
-import type { Account } from "../../../Shared/Types/Domain/account/Account.type";
-import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 import TargetAccount from "../Components/TargetAccount";
+import LogoutButton from "../Components/LogoutButton";
+import { useGetListAccounts } from "../Hooks/ListAccounts.hook";
 
 export default function Dashboard() {
+  const {
+    data: accountArray,
+    isLoading,
+    error,
+    isSuccess,
+  } = useGetListAccounts();
 
-  const { setIsAuthenticated } = useAuthenticatedStore();
-
-  const account: Account = {
-    id: '1',
-    title: 'My Account',
-    username: 'johndoe',
-    description: 'This is my account description.',
-    category: 'Personal',
-  };
-  const accountArray: Account[] = [
-    {
-      id: '1',
-      title: 'My Account',
-      username: 'johndoe',
-      description: 'This is my account description.',
-      category: 'Personal',
-    },
-    {
-      id: '2',
-      title: 'Work Account',
-      username: 'janedoe',
-      description: 'This is my work account description.',
-      category: 'Work',
-    },
-    {
-      id: '3',
-      title: 'Social Media Account',
-      username: 'socialuser',
-      description: 'This is my social media account description.',
-      category: 'Social Media',
-    }
-  ];
-  function handleLogout() {
-    setIsAuthenticated(false);
-  }
+  //   {
+  //     id: "1",
+  //     title: "My Account",
+  //     username: "johndoe",
+  //     description: "This is my account description.",
+  //     category: "Personal",
+  //   },
+  //   {
+  //     id: "2",
+  //     title: "Work Account",
+  //     username: "janedoe",
+  //     description: "This is my work account description.",
+  //     category: "Work",
+  //   },
+  //   {
+  //     id: "3",
+  //     title: "Social Media Account",
+  //     username: "socialuser",
+  //     description: "This is my social media account description.",
+  //     category: "Social Media",
+  //   },
+  //   {
+  //     id: "1",
+  //     title: "My Account",
+  //     username: "jon@gmail.com",
+  //     description: "This is my account description.",
+  //     category: "Personal",
+  //   },
+  // ];
 
   return (
-    <div className="flex flex-col items-center  min-h-screen py-2">
-      
-      <header className="flex justify-between items-center w-full px-4 py-2 bg-gray-100 border-b border-gray-300">
-        <h1 className="text-2xl font-bold mb-4 text-gray-800">Dashboard</h1>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+    <div className="flex flex-col items-center min-h-screen min-w-screen">
+      <header className="flex flex-col w-4/5 pt-6">
+        <h1 className="text-4xl font-bold mb-4 text-green-50 text-center">
+          Accounts
+        </h1>
+        <hr className="border-t border-gray-300 " />
       </header>
-
       {/* panel grid */}
-      <div className="w-full max-w-4xl px-4 py-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {accountArray.map((acc) => (
-          <TargetAccount key={acc.id} account={acc} />
-        ))}
-        </div>
+      <section className="w-full max-w-max px-4 py-6">
+        {isLoading && <p>Loading accounts...</p>}
+        {error && <p>Error loading accounts</p>}
+        {isSuccess && (
+          <>
+            {accountArray.length === 0 ? (
+              <p className="text-center text-gray-400">No accounts found.</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-8 md:grid-cols-3 gap-5">
+                {accountArray.map((acc) => (
+                  <TargetAccount key={acc.id} account={acc} />
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </section>
+
+      <div className="fixed top-4 left-4">
+        <LogoutButton />
       </div>
+
       <NavLink
         to="/create-account"
-        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        className="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700"
       >
         Create Account
       </NavLink>
     </div>
-  )
+  );
 }

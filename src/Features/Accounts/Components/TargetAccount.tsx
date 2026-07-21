@@ -1,13 +1,17 @@
-import type { Account } from '../../../Shared/Types/Domain/account/Account.type'
+import { DiOpensource } from "react-icons/di";
+import type { AccountListResponse } from "../../../Shared/Types/Domain/account/AccountListResponse.type";
 
-export default function TargetAccount({account}: {account: Account}) {
+export default function TargetAccount({ account }: { account: AccountListResponse }) {
   return (
-    <div className="flex flex-col py-2 bg-green-600 rounded-lg shadow-md p-4 mb-4 w-full max-w-md">
-       <div className="text-xl font-bold mb-2">{account.title}</div> 
-       <div className="mb-2"><span className="font-bold">Username:</span> <span>{account.username}</span></div>
-       <div className="mb-2"><span className="font-bold">Description:</span> {account.description}</div>
-       <div className="mb-2"><span className="font-bold">Category:</span> {account.category}</div>
+    <div className="flex items-center justify-between bg-gray-500 text-xl w-sm p-4 gap-3">
+      <div>
+        <DiOpensource className="text-7xl " />
+      </div>
+      <div>
+        <h3 className="text-md font-bold">{account.title}</h3>
+        <h4 className="text-lg">{account.username}</h4>
+        <p className="text-sm">{account.description}</p>
+      </div>
     </div>
-  )
+  );
 }
-  
