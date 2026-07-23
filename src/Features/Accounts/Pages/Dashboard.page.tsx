@@ -10,37 +10,7 @@ export default function Dashboard() {
     error,
     isSuccess,
   } = useGetListAccounts();
-
-  //   {
-  //     id: "1",
-  //     title: "My Account",
-  //     username: "johndoe",
-  //     description: "This is my account description.",
-  //     category: "Personal",
-  //   },
-  //   {
-  //     id: "2",
-  //     title: "Work Account",
-  //     username: "janedoe",
-  //     description: "This is my work account description.",
-  //     category: "Work",
-  //   },
-  //   {
-  //     id: "3",
-  //     title: "Social Media Account",
-  //     username: "socialuser",
-  //     description: "This is my social media account description.",
-  //     category: "Social Media",
-  //   },
-  //   {
-  //     id: "1",
-  //     title: "My Account",
-  //     username: "jon@gmail.com",
-  //     description: "This is my account description.",
-  //     category: "Personal",
-  //   },
-  // ];
-
+  
   return (
     <div className="flex flex-col items-center min-h-screen min-w-screen">
       <header className="flex flex-col w-4/5 pt-6">

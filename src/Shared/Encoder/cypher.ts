@@ -27,10 +27,16 @@ export function bytesToHexString(bytes: Uint8Array) {
     return bytesToHex(bytes).toString();
 }
 
-export function decript(encrypted: string, key: string, nonce: Uint8Array) {
+/*
+encrypted: string encrypted text in hex format: String
+key: privatekey in hex format from 32 bytes: String
+nonce: random bytes 24 length: String
+*/
+export function decript(encrypted: string, key: string, nonce: string) {
     const keyBytes = hexToBytes(key);
     const encryptedBytes = hexToBytes(encrypted);
-    const cipher = xchacha20poly1305(keyBytes,nonce);
+    const nonceBytes = hexToBytes(nonce);
+    const cipher = xchacha20poly1305(keyBytes,nonceBytes);
     const decrypted = cipher.decrypt(encryptedBytes);
     return new TextDecoder().decode(decrypted);
 }

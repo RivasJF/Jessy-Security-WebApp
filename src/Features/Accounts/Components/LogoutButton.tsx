@@ -1,9 +1,9 @@
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 
 export default function LogoutButton() {
-  const { setIsAuthenticated } = useAuthenticatedStore();
+  const { logout } = useAuthenticatedStore();
   function handleLogout() {
-    setIsAuthenticated(false);
+    logout();
   }
   return (
     <button

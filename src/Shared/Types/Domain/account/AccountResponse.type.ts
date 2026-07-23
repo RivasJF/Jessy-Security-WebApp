@@ -4,10 +4,11 @@ export type AccountResponse = {
     username: string;
     description: string;
     category: string;
-    additionalInformation: AdditionalInformationResponse[];
+    additionalInformation: AdditionalInformation[];
 }
 
-export type AdditionalInformationResponse = {
+export type AdditionalInformation = {
     type: string;
     value: string;
+    key: string;
 }

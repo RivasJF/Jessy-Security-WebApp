@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router";
 import { DiOpensource } from "react-icons/di";
 import type { AccountListResponse } from "../../../Shared/Types/Domain/account/AccountListResponse.type";
 
 export default function TargetAccount({ account }: { account: AccountListResponse }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex items-center justify-between bg-gray-500 text-xl w-sm p-4 gap-3">
+    <div
+      onClick={() => navigate(`/account/${account.id}`)}
+      className="flex items-center justify-start bg-gray-500 text-xl w-sm p-3 gap-3 cursor-pointer"
+    >
       <div>
         <DiOpensource className="text-7xl " />
       </div>

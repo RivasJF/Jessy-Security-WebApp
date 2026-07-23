@@ -1,4 +1,5 @@
 export const AdditionalInformationType = {
+    PASSWORD: "PASSWORD",
     EMAIL: "EMAIL",
     PIN: "PIN",
     CODE: "CODE",

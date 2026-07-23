@@ -9,7 +9,7 @@ import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorRespons
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 
 export function useRegisterForm() {
-  const { setAccessToken, setPrivateKey, setIsAuthenticated } = useAuthenticatedStore();
+  const { login } = useAuthenticatedStore();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -28,26 +28,15 @@ export function useRegisterForm() {
     const passwordHash = await hashPassword(formData.password, salt);
     const keys = await generateKeyPair(passwordHash);
 
-    // to stored
-    // - secretKey: keys.secretKey
-    setPrivateKey(keys.secretKey);
-
-    // to  Backend
-    console.log({
-      email: formData.email,
-      publicKey: keys.publicKey,
-      salt: bytesToHexString(salt)
-    });
     const registerData: UserApiTypes.RegisterUserRequest = {
       email: formData.email,
       username: formData.username,
       publicKey: keys.publicKey,
       publicSalt: bytesToHexString(salt)
     }
-    console.log("Register data to send to backend:", registerData);
+
     const response = await fetchSaveToBackend(registerData);
-    setAccessToken(response.access_token);
-    setIsAuthenticated(true);
+    login(keys.secretKey, response.access_token);
   };
 
   return { formData, handleChange, handleSubmit };

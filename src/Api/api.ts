@@ -1,5 +1,4 @@
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
-import type { ApiErrorResponse } from "../Shared/Types/Api/ApiErrorResponse.dto";
 import type { ApiResponse } from "../Shared/Types/Api/ApiResponse.dto";
 import { useAuthenticatedStore } from "../Store/Authenticated.store";
 import type { TokensTypes } from "../Shared/Types/Domain/auth/Token.types";
@@ -67,9 +66,7 @@ api.interceptors.response.use(
 
       return api(originalRequest);
     } catch (refreshError) {
-      useAuthenticatedStore.getState().setAccessToken("");
-      useAuthenticatedStore.getState().setIsAuthenticated(false);
-      useAuthenticatedStore.getState().setPrivateKey("");
+      useAuthenticatedStore.getState().logout();
       return Promise.reject(refreshError);
     }
   }

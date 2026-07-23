@@ -12,8 +12,7 @@ import type { TokensTypes } from "../../../Shared/Types/Domain/auth/Token.types"
 
 
 export function useLoginForm() {
-  const { setAccessToken, setPrivateKey, setIsAuthenticated } =
-    useAuthenticatedStore();
+  const { login } = useAuthenticatedStore();
   const [formData, setFormData] = useState<LoginTypes.LoginFormData>({
     email: "",
     password: "",
@@ -48,9 +47,7 @@ export function useLoginForm() {
 
     onSuccess: ({ token, keys }) => {
       // to stored
-      setPrivateKey(keys.secretKey);
-      setAccessToken(token.access_token);
-      setIsAuthenticated(true);
+      login(keys.secretKey, token.access_token);
     },
 
     onError: (error: AxiosError<ApiErrorResponse>) => {
