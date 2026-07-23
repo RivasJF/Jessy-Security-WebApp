@@ -2,10 +2,10 @@ import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import type { CategoryAccount } from "../../../Shared/Types/Domain/account/CategoryAccount.type";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 import type { AdditionalInformation, RegisterAccount } from "../../../Shared/Types/Domain/account/RegisterAccount.type";
-import { encryptAdditionalInformation } from "../../../Shared/Utils/EncriptedAdditionalInformation";
 import { registerAccount } from "../../../Api/Account/account.v1";
 import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
 import type { AxiosError } from "axios";
+import { encryptAdditionalInformation } from "../Services/Encriptyng.service";
 
 type Inputs = {
   title: string;

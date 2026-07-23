@@ -1,7 +1,7 @@
-import { decript } from "../../../Shared/Encoder/cypher";
 import type { AdditionalInformation } from "../../../Shared/Types/Domain/account/AccountResponse.type";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 import { useState } from "react";
+import { decryptAdditionalInformation } from "../Services/Encriptyng.service";
 
 export default function TargetAdditionalInformation({
   data,
@@ -17,7 +17,7 @@ export default function TargetAdditionalInformation({
       setDecryptedValue(null);
       return;
     }
-    const res = decript(data.value || "", privateKey, data.key || "");
+    const res = decryptAdditionalInformation(data, privateKey);
     setDecryptedValue(res);
   }
 

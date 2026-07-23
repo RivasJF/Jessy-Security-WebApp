@@ -1,13 +1,5 @@
-import { randomBytes } from "@noble/curves/utils.js";
+import { randomBytes } from "@noble/ciphers/utils.js";
 import { argon2id, type IArgon2Options } from "hash-wasm";
-
-export async function generateSalt(length: number): Promise<Uint8Array> {
-    if (length <= 0 || !Number.isInteger(length)) {
-        throw new Error("Length must be a positive integer.");
-    }
-    randomBytes
-    return window.crypto.getRandomValues(new Uint8Array(length));
-}
 
 export async function hashPassword(password: string, salt: Uint8Array): Promise<string> {
     if (typeof password !== "string" || password.length === 0) {
@@ -30,3 +22,7 @@ export async function hashPassword(password: string, salt: Uint8Array): Promise<
     return await argon2id(options);
 }
 
+export function generateSalt() {
+    const salt = randomBytes(32);
+    return salt;
+}

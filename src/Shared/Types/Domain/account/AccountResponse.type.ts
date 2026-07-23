@@ -1,3 +1,5 @@
+import type { AdditionalInformationType } from "./AditionaInformation.type";
+
 export type AccountResponse = {
     id: string;
     title: string;
@@ -8,7 +10,7 @@ export type AccountResponse = {
 }
 
 export type AdditionalInformation = {
-    type: string;
+    type: AdditionalInformationType;
     value: string;
     key: string;
 }

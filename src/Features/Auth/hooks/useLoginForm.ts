@@ -2,13 +2,13 @@ import { useState } from "react";
 import { hashPassword } from "../../../Shared/Encoder/hash";
 import { generateKeyPair } from "../../../Shared/Encoder/keys";
 import { fetchLoginUser, fetchSalt } from "../../../Api/Auth/auth.api";
-import { stringHexToBytes } from "../../../Shared/Encoder/cypher";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
 import type { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import type { LoginTypes } from "../types/Login.types";
 import type { TokensTypes } from "../../../Shared/Types/Domain/auth/Token.types";
+import { stringHexToBytes } from "../../../Shared/Encoder/Format";
 
 
 export function useLoginForm() {

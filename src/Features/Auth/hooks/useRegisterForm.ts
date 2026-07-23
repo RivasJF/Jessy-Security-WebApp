@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { bytesToHexString, generateRamdomKey32 } from "../../../Shared/Encoder/cypher";
-import { hashPassword } from "../../../Shared/Encoder/hash";
-import { generateKeyPair } from "../../../Shared/Encoder/keys";
 import { fetchRegisterUser } from "../../../Api/Auth/auth.api";
 import type { UserApiTypes } from "../../../Shared/Types/Domain/auth/User-api.types";
 import type { AxiosError } from "axios";
 import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
+import { generateAccessKeyRegister, type AccessKeyRegister } from "../service/hashing.service";
 
 export function useRegisterForm() {
   const { login } = useAuthenticatedStore();
@@ -24,19 +22,17 @@ export function useRegisterForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const salt = generateRamdomKey32();
-    const passwordHash = await hashPassword(formData.password, salt);
-    const keys = await generateKeyPair(passwordHash);
+    const AccessKey: AccessKeyRegister = await generateAccessKeyRegister(formData.password);
 
     const registerData: UserApiTypes.RegisterUserRequest = {
       email: formData.email,
       username: formData.username,
-      publicKey: keys.publicKey,
-      publicSalt: bytesToHexString(salt)
+      publicKey: AccessKey.keys.publicKey,
+      publicSalt: AccessKey.salt,
     }
 
     const response = await fetchSaveToBackend(registerData);
-    login(keys.secretKey, response.access_token);
+    login(AccessKey.keys.secretKey, response.access_token);
   };
 
   return { formData, handleChange, handleSubmit };
