@@ -7,96 +7,121 @@ export default function FormAccount() {
     useFormAccount();
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-2">
-      FormAccount
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
-        <form
-          className="space-y-6 text-black"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div>
-            <label htmlFor="title">Title</label>
-            {errors.title && (
-              <span className="text-red-500">Title is required</span>
-            )}
-            <input
-              {...register("title", { required: true })}
-              type="text"
-              id="title"
-              className="mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
-            />
-          </div>
+    <section className="flex flex-col items-center min-h-screen min-w-screen">
+      <header className="fixed w-full text-white p-4">
+        <h2 className="text-2xl font-bold text-center">FormAccount</h2>
+      </header>
+      <section className="flex flex-col items-center justify-center min-h-screen">
+        <div className="h-full w-full rounded-lg bg-white p-8 shadow-lg">
+          <form
+            className="space-y-6 text-black"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div>
+              <label htmlFor="title">Title</label>
+              {errors.title && (
+                <span className="text-red-500">Title is required</span>
+              )}
+              <input
+                {...register("title", { required: true })}
+                type="text"
+                id="title"
+                className="border mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              {...register("username", { required: true })}
-              className="mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
-            />
-          </div>
+            <div>
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                {...register("username", { required: true })}
+                className="border mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
+              />
+            </div>
 
-          <div>
-          <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              {...register("description", { required: true })}
-            ></textarea>
-          </div>
+            <div>
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                {...register("description")}
+                className="border mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
+              ></textarea>
+            </div>
 
-          <div>
-            <label htmlFor="category">Category</label>
-            <select id="category" {...register("category", { required: true })}>
-              {Object.values(CategoryAccount).map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Additional Information Fields */}
-
-          {fields.map((field, index) => (
-            <div key={field.id}>
-              <select {...register(`additionalInformation.${index}.type`)}>
-                {Object.values(AdditionalInformationType).map((type) => (
-                  <option key={type} value={type}>
-                    {type}
+            <div>
+              <label htmlFor="category">Category</label>
+              <select
+                id="category"
+                className="border mt-1 p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
+                {...register("category", { required: true })}
+              >
+                {Object.values(CategoryAccount).map((category) => (
+                  <option key={category} value={category}>
+                    {category}
                   </option>
                 ))}
               </select>
+            </div>
 
-              <input
-                {...register(`additionalInformation.${index}.value`)}
-                placeholder="Value"
-              />
+            {/* Additional Information Fields */}
 
-              <button type="button" onClick={() => remove(index)}>
-                Eliminar
+            {fields.map((field, index) => (
+              <div 
+              key={field.id}
+              className="flex items-center gap-2 mt-2 p-0.5"
+              >
+                <select 
+                {...register(`additionalInformation.${index}.type`)}
+                className="border rounded-md border-gray-500 shadow-sm text-gray-900"
+                >
+                  {Object.values(AdditionalInformationType).map((type) => (
+                    <option 
+                    key={type} 
+                    value={type}
+                    className="border p-0.5 block w-full rounded-md border-gray-500 shadow-sm text-gray-900"
+                    >
+                      {type}
+                    </option>
+                  ))}
+                </select>
+
+                <input
+                  {...register(`additionalInformation.${index}.value`)}
+                  placeholder="Value"
+                  className="border p-0.5 w-fit rounded-md border-gray-500 shadow-sm text-gray-900"
+                />
+
+                <button 
+                type="button" 
+                onClick={() => remove(index)}
+                className="bg-red-500 text-white p-1 rounded-md hover:bg-red-600 focus:ring-red-500 "
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+            <div
+            className="flex items-center justify-center ">
+              <button
+              type="button"
+              onClick={() => append({ type: "", value: "" })}
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-blue-500 "
+            >
+              Add Information
+            </button>
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+              >
+                Create Account
               </button>
             </div>
-          ))}
-
-          <button
-            type="button"
-            onClick={() => append({ type: "", value: "" })}
-          >
-            Agregar información adicional
-          </button>
-
-
-          <div>
-            <button
-              type="submit"
-              className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-            >
-              Create Account
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+          </form>
+        </div>
+      </section>
+    </section>
   );
 }
