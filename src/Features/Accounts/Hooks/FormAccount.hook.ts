@@ -1,7 +1,7 @@
 import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import type { CategoryAccount } from "../../../Shared/Types/Domain/account/CategoryAccount.type";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
-import type { AdditionalInformation, RegisterAccount } from "../../../Shared/Types/Domain/account/RegisterAccount.type";
+import type { AdditionalInformation, RegisterAccount } from "../../../Shared/Types/Domain/account/request/RegisterAccount.type";
 import { registerAccount } from "../../../Api/Account/account.v1";
 import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
 import type { AxiosError } from "axios";

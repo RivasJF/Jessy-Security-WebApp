@@ -1,11 +1,11 @@
-import type { AdditionalInformationType } from "./AditionaInformation.type";
+import type { AdditionalInformationType } from "../AditionaInformation.type";
+import type { CategoryAccount } from "../CategoryAccount.type";
 
-export type AccountResponse = {
-    id: string;
+export type RegisterAccount = {
     title: string;
     username: string;
     description: string;
-    category: string;
+    category: CategoryAccount;
     additionalInformation: AdditionalInformation[];
 }
 

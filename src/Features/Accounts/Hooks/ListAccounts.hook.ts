@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { AccountListResponse } from "../../../Shared/Types/Domain/account/AccountListResponse.type";
+import type { AccountListResponse } from "../../../Shared/Types/Domain/account/response/AccountListResponse.type";
 import { fetchListAccounts } from "../../../Api/Account/account.v1";
 import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
 import type { AxiosError } from "axios";
