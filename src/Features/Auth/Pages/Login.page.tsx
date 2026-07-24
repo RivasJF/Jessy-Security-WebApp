@@ -1,6 +1,7 @@
 import { Navigate, NavLink } from "react-router";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 import { useLoginForm } from "../hooks/useLoginForm";
+import HomeButton from "../../../Shared/Components/HomeButton";
 
 export default function Login() {
   const { formData, handleChange, handleSubmit , error, isLoading } = useLoginForm();
@@ -12,6 +13,7 @@ export default function Login() {
 
   return (
     <section className="flex h-screen items-center justify-center">
+      <HomeButton />
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
         <h2 className="mb-6 text-center text-2xl font-bold text-black">
           Login

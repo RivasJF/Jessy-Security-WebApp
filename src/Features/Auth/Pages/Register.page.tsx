@@ -1,6 +1,7 @@
 import { Navigate, NavLink } from "react-router";
 import { useRegisterForm } from "../hooks/useRegisterForm";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
+import HomeButton from "../../../Shared/Components/HomeButton";
 
 export default function Register() {
   const { formData, handleChange, handleSubmit } = useRegisterForm();
@@ -12,6 +13,7 @@ export default function Register() {
 
   return (
     <section className="flex h-screen items-center justify-center">
+      <HomeButton />
       <div className="w-full max-w-md rounded-lg bg-zinc-50 p-8 shadow-lg">
         <h2 className="mb-6 text-center text-2xl font-bold text-black">
           Register

@@ -1,4 +1,5 @@
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
+import { ImEnter } from "react-icons/im";
 
 export default function LogoutButton() {
   const { logout } = useAuthenticatedStore();
@@ -7,10 +8,15 @@ export default function LogoutButton() {
   }
   return (
     <button
-      className="bg-indigo-50 text-black px-4 py-2 rounded hover:bg-sky-100"
+      className="bg-indigo-50 text-black px-4 py-2 rounded hover:bg-black hover:text-amber-50 flex items-center  gap-2"
       onClick={handleLogout}
     >
-      Logout
+      <ImEnter
+        className="text-3xl"
+      />
+      <p
+      className="text-lg"
+      >Logout</p>
     </button>
   );
 }

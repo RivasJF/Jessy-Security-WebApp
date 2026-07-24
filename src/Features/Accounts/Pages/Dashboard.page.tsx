@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import TargetAccount from "../Components/TargetAccount";
 import LogoutButton from "../Components/LogoutButton";
 import { useGetListAccounts } from "../Hooks/ListAccounts.hook";
+import HomeButton from "../../../Shared/Components/HomeButton";
 
 export default function Dashboard() {
   const {
@@ -13,6 +14,7 @@ export default function Dashboard() {
   
   return (
     <div className="flex flex-col items-center min-h-screen min-w-screen">
+      <HomeButton />
       <header className="flex flex-col w-4/5 pt-6">
         <h1 className="text-4xl font-bold mb-4 text-green-50 text-center">
           Accounts
@@ -38,7 +40,7 @@ export default function Dashboard() {
         )}
       </section>
 
-      <div className="fixed top-4 left-4">
+      <div className="fixed top-4 right-4">
         <LogoutButton />
       </div>
 
