@@ -1,5 +1,4 @@
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
-import type { ApiResponse } from "../Shared/Types/Api/ApiResponse.dto";
 import { useAuthenticatedStore } from "../Store/Authenticated.store";
 import type { TokensTypes } from "../Shared/Types/Domain/auth/Token.types";
 
@@ -44,7 +43,7 @@ const refreshApi = axios.create({
 });
   
 api.interceptors.response.use(
-  (response:AxiosResponse<ApiResponse<unknown>>) => response,
+  (response:AxiosResponse<unknown>) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
@@ -55,8 +54,8 @@ api.interceptors.response.use(
     originalRequest._retry = true;
 
     try {
-      const refreshResponse:AxiosResponse<ApiResponse<TokensTypes.TokenResponse>> = await refreshApi.post("/auth/refresh");
-      const newAccessToken = refreshResponse.data.data.access_token;
+      const refreshResponse:AxiosResponse<TokensTypes.TokenResponse> = await refreshApi.post("/auth/refresh");
+      const newAccessToken = refreshResponse.data.access_token;
 
       useAuthenticatedStore.getState().setAccessToken(newAccessToken);
       originalRequest.headers = {
