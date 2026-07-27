@@ -1,6 +1,5 @@
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
-import type { TokensTypes } from "../shared";
-import { useAuthenticatedStore } from "../features";
+import { useAuthenticatedStore, type TokenResponse } from "../features";
 
 
 const api = axios.create({
@@ -55,7 +54,7 @@ api.interceptors.response.use(
     originalRequest._retry = true;
 
     try {
-      const refreshResponse:AxiosResponse<TokensTypes.TokenResponse> = await refreshApi.post("/auth/refresh");
+      const refreshResponse:AxiosResponse<TokenResponse> = await refreshApi.post("/auth/refresh");
       const newAccessToken = refreshResponse.data.access_token;
 
       useAuthenticatedStore.getState().setAccessToken(newAccessToken);

@@ -2,13 +2,23 @@ import { useState } from "react";
 import { useAuthenticatedStore } from "../store/Authenticated.store";
 import type { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
-import type { LoginTypes } from "../types/Login.types";
 import { fetchLoginUser, fetchSalt } from "../api/auth.api";
-import { generateKeyPair, hashPassword, stringHexToBytes, type ApiErrorResponse, type TokensTypes } from "../../../shared";
+import { generateKeyPair, hashPassword, stringHexToBytes, type ApiErrorResponse, type KeyPair } from "../../../shared";
+import type { GetSaltResponse, TokenResponse } from "../types/api.types";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
+
+type LoginMutationResult = {
+  token: TokenResponse;
+  keys: KeyPair;
+};
 
 export function useLoginForm() {
   const { login } = useAuthenticatedStore();
-  const [formData, setFormData] = useState<LoginTypes.LoginFormData>({
+  const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
   });
@@ -21,19 +31,19 @@ export function useLoginForm() {
   };
 
   const loginMutation = useMutation<
-    LoginTypes.LoginMutationResult,
+    LoginMutationResult,
     AxiosError<ApiErrorResponse>,
-    LoginTypes.LoginFormData
+    LoginFormData
   >({
-    mutationFn: async (data: LoginTypes.LoginFormData) => {
+    mutationFn: async (data: LoginFormData) => {
       // fetch salt_F
-      const keysSalt: TokensTypes.SaltResponse = await fetchSalt(data.email);
+      const keysSalt: GetSaltResponse = await fetchSalt(data.email);
       const salt = stringHexToBytes(keysSalt.salt);
       // create valid keys
       const passwordHash = await hashPassword(data.password, salt);
-      const keys: TokensTypes.KeyPair = await generateKeyPair(passwordHash);
+      const keys: KeyPair = await generateKeyPair(passwordHash);
       // fetch login {email, publicKey}
-      const accessToken: TokensTypes.TokenResponse = await fetchLoginUser({
+      const accessToken: TokenResponse = await fetchLoginUser({
         email: data.email,
         publicKey: keys.publicKey,
       });

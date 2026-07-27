@@ -1,26 +1,24 @@
-import type { UserApiTypes } from "../../../shared";
-import type { TokensTypes } from "../../../shared";
 import api from "../../../lib/api";
-
+import type { GetSaltResponse, LoginUserRequest, RegisterUserRequest, TokenResponse } from "../types/api.types";
 
 const API_BASE_URL = "/auth";
 
-export const fetchRegisterUser = async (userData: UserApiTypes.RegisterUserRequest) => {
-    const response = await api.post<TokensTypes.TokenResponse>(`${API_BASE_URL}/register`, userData);
+export const fetchRegisterUser = async (userData: RegisterUserRequest) => {
+    const response = await api.post<TokenResponse>(`${API_BASE_URL}/register`, userData);
     return response.data;
 }
 
-export const fetchLoginUser = async (userData: UserApiTypes.LoginUserRequest) => {
-    const response = await api.post<TokensTypes.TokenResponse>(`${API_BASE_URL}/login`, userData);
+export const fetchLoginUser = async (userData: LoginUserRequest) => {
+    const response = await api.post<TokenResponse>(`${API_BASE_URL}/login`, userData);
     return response.data;
 }
 
 export const fetchRefreshToken = async () => {
-    const response = await api.post<TokensTypes.TokenResponse>(`${API_BASE_URL}/refresh`);
+    const response = await api.post<TokenResponse>(`${API_BASE_URL}/refresh`);
     return response.data;
 }
 
 export const fetchSalt = async (email: string) => {
-    const response = await api.get<TokensTypes.SaltResponse>(`${API_BASE_URL}/salt/${email}`);
+    const response = await api.get<GetSaltResponse>(`${API_BASE_URL}/salt/${email}`);
     return response.data;
 }

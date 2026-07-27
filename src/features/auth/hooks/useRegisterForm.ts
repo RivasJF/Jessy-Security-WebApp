@@ -3,7 +3,8 @@ import { fetchRegisterUser } from "../api/auth.api";
 import type { AxiosError } from "axios";
 import { useAuthenticatedStore } from "../store/Authenticated.store";
 import { generateAccessKeyRegister, type AccessKeyRegister } from "../service/hashing.service";
-import type { ApiErrorResponse, UserApiTypes } from "../../../shared";
+import type { ApiErrorResponse } from "../../../shared";
+import type { RegisterUserRequest } from "../types/api.types";
 
 export function useRegisterForm() {
   const { login } = useAuthenticatedStore();
@@ -23,7 +24,7 @@ export function useRegisterForm() {
     e.preventDefault();
     const AccessKey: AccessKeyRegister = await generateAccessKeyRegister(formData.password);
 
-    const registerData: UserApiTypes.RegisterUserRequest = {
+    const registerData: RegisterUserRequest = {
       email: formData.email,
       username: formData.username,
       publicKey: AccessKey.keys.publicKey,
@@ -37,7 +38,7 @@ export function useRegisterForm() {
   return { formData, handleChange, handleSubmit };
 }
 
-async function fetchSaveToBackend(data: UserApiTypes.RegisterUserRequest) {
+async function fetchSaveToBackend(data: RegisterUserRequest) {
     try {
       const response = await fetchRegisterUser(data)
       console.log("User registered successfully:", response);
