@@ -2,7 +2,7 @@ import { decript, encript, generateNounce } from "../../../Shared/Encoder/cypher
 import { bytesToHexString } from "../../../Shared/Encoder/Format";
 import type { AdditionalInformationType } from "../../../Shared/Types/Domain/account/AditionaInformation.type";
 import type { AdditionalInformation } from "../../../Shared/Types/Domain/account/request/RegisterAccount.type";
-import type { AdditionalInformationInput } from "../Hooks/FormAccount.hook";
+import type { AdditionalInformationInput } from "../types/InputFormAccounr";
 
 /*
 privateKey: string private key in hex format from 32 bytes

@@ -1,24 +1,12 @@
 import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
-import type { CategoryAccount } from "../../../Shared/Types/Domain/account/CategoryAccount.type";
 import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
 import type { AdditionalInformation, RegisterAccount } from "../../../Shared/Types/Domain/account/request/RegisterAccount.type";
 import { registerAccount } from "../../../Api/Account/account.v1";
 import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
 import type { AxiosError } from "axios";
 import { encryptAdditionalInformation } from "../Services/Encriptyng.service";
+import type { Inputs } from "../types/InputFormAccounr";
 
-type Inputs = {
-  title: string;
-  username: string;
-  description: string;
-  category: CategoryAccount;
-  additionalInformation: AdditionalInformationInput[];
-};
-
-export type AdditionalInformationInput = {
-  type: string;
-  value: string;
-};
 
 
 export const useFormAccount = () => {

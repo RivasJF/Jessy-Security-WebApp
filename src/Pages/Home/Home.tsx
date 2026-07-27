@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { NavLink } from "react-router";
-import { fetchHelloWorld } from "./Api/HelloWorld/helloWorld.api";
+import { fetchHelloWorld } from "../../Api/HelloWorld/helloWorld.api";
 
 const path = "</>";
 
-function App() {
+function Home() {
 
   async function fetchData() {
     try {
@@ -52,4 +52,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

@@ -1,17 +1,13 @@
 import { createBrowserRouter } from "react-router";
-import App from "../App";
-import Login from "../Features/Auth/Pages/Login.page";
-import Register from "../Features/Auth/Pages/Register.page";
-import Test from "../Features/Auth/Pages/Test.page";
 import ProtectedRouter from "./protected.router";
-import Dashboard from "../Features/Accounts/Pages/Dashboard.page";
-import FormAccount from "../Features/Accounts/Pages/CreateAccount.page";
-import InfoAccount from "../Features/Accounts/Pages/InfoAccount.page";
+import { Login, Register } from "../Pages/auth";
+import { Dashboard, FormAccount, InfoAccount } from "../Pages/Dashboard";
+import Home from "../Pages/Home/Home";
 
 const ROUTER = createBrowserRouter([
   {
     path: "/",
-    Component: App,
+    Component: Home,
   },
   {
     path: "/login",
@@ -38,11 +34,6 @@ const ROUTER = createBrowserRouter([
       }
     ],
   },
-        {
-        path: "/test",
-        Component: Test,
-      },
-
   {
     path: "*",
     Component: () => <h1>404 Not Found</h1>,
