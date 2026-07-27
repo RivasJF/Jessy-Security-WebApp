@@ -2,7 +2,7 @@ import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import { registerAccount } from "../api/account.v1";
 import type { AxiosError } from "axios";
 import type { Inputs } from "../types/InputFormAccounr";
-import type { AdditionalInformation, ApiErrorResponse, RegisterAccount } from "../../../Shared";
+import type { AdditionalInformation, ApiErrorResponse, RegisterAccount } from "../../../shared";
 import { useAuthenticatedStore } from "../../auth/store/Authenticated.store";
 import { encryptAdditionalInformation } from "../services/Encriptyng.service";
 

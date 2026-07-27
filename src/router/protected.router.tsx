@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router";
-import { useAuthenticatedStore } from "../Features";
+import { useAuthenticatedStore } from "../features";
 
 
 export default function ProtectedRouter() {

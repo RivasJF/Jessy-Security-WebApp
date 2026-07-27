@@ -1,6 +1,6 @@
 import { Navigate, NavLink } from "react-router";
-import { useAuthenticatedStore, useLoginForm } from "../../Features";
-import { HomeButton } from "../../Shared";
+import { useAuthenticatedStore, useLoginForm } from "../../features";
+import { HomeButton } from "../../shared";
 
 export default function Login() {
   const { formData, handleChange, handleSubmit , error, isLoading } = useLoginForm();

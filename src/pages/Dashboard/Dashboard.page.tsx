@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
-import { LogoutButton, TargetAccount, useGetListAccounts } from "../../Features";
-import { HomeButton } from "../../Shared";
+import { LogoutButton, TargetAccount, useGetListAccounts } from "../../features";
+import { HomeButton } from "../../shared";
 
 export default function Dashboard() {
   const {

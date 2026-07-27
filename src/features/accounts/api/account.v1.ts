@@ -1,4 +1,4 @@
-import type { AccountListResponse, AccountResponse, RegisterAccount } from "../../../Shared";
+import type { AccountListResponse, AccountResponse, RegisterAccount } from "../../../shared";
 import api from "../../../lib/api";
 
 const API_BASE_URL = "/accounts";

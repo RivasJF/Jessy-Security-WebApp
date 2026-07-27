@@ -1,6 +1,6 @@
 import { Navigate, NavLink } from "react-router";
-import { useAuthenticatedStore, useRegisterForm } from "../../Features";
-import { HomeButton } from "../../Shared";
+import { useAuthenticatedStore, useRegisterForm } from "../../features";
+import { HomeButton } from "../../shared";
 
 export default function Register() {
   const { formData, handleChange, handleSubmit } = useRegisterForm();

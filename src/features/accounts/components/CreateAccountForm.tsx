@@ -1,4 +1,4 @@
-import { AdditionalInformationType, CategoryAccount } from "../../../Shared";
+import { AdditionalInformationType, CategoryAccount } from "../../../shared";
 import { useFormAccount } from "../hooks/useFormAccount.hook";
 
 function CreateAccountForm() {

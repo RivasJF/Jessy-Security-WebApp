@@ -3,7 +3,7 @@ import { fetchRegisterUser } from "../api/auth.api";
 import type { AxiosError } from "axios";
 import { useAuthenticatedStore } from "../store/Authenticated.store";
 import { generateAccessKeyRegister, type AccessKeyRegister } from "../service/hashing.service";
-import type { ApiErrorResponse, UserApiTypes } from "../../../Shared";
+import type { ApiErrorResponse, UserApiTypes } from "../../../shared";
 
 export function useRegisterForm() {
   const { login } = useAuthenticatedStore();

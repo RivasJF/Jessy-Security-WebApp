@@ -1,4 +1,4 @@
-import { bytesToHexString, decript, encript, generateNounce, type AdditionalInformation, type AdditionalInformationType } from "../../../Shared";
+import { bytesToHexString, decript, encript, generateNounce, type AdditionalInformation, type AdditionalInformationType } from "../../../shared";
 import type { AdditionalInformationInput } from "../types/InputFormAccounr";
 
 /*

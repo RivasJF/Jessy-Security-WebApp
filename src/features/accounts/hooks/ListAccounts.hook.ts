@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchListAccounts } from "../api/account.v1";
 import type { AxiosError } from "axios";
-import type { AccountListResponse, ApiErrorResponse } from "../../../Shared";
+import type { AccountListResponse, ApiErrorResponse } from "../../../shared";
 
 export const useGetListAccounts = () => {
     return useQuery<AccountListResponse[], AxiosError<ApiErrorResponse>>({

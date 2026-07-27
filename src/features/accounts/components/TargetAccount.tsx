@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { DiOpensource } from "react-icons/di";
-import type { AccountListResponse } from "../../../Shared";
+import type { AccountListResponse } from "../../../shared";
 
 export default function TargetAccount({ account }: { account: AccountListResponse }) {
   const navigate = useNavigate();

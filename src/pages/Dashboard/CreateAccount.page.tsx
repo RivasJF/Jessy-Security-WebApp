@@ -1,4 +1,4 @@
-import { CreateAccountForm } from "../../Features";
+import { CreateAccountForm } from "../../features";
 
 export default function FormAccount() {
   return (

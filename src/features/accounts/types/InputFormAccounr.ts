@@ -1,4 +1,4 @@
-import type { CategoryAccount } from "../../../Shared";
+import type { CategoryAccount } from "../../../shared";
 
 export type Inputs = {
   title: string;

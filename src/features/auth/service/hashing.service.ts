@@ -1,4 +1,4 @@
-import { bytesToHexString, generateKeyPair, generateSalt, hashPassword, type TokensTypes } from "../../../Shared";
+import { bytesToHexString, generateKeyPair, generateSalt, hashPassword, type TokensTypes } from "../../../shared";
 
 export type AccessKeyRegister = {
     keys: TokensTypes.KeyPair,

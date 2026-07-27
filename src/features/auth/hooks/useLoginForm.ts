@@ -4,7 +4,7 @@ import type { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import type { LoginTypes } from "../types/Login.types";
 import { fetchLoginUser, fetchSalt } from "../api/auth.api";
-import { generateKeyPair, hashPassword, stringHexToBytes, type ApiErrorResponse, type TokensTypes } from "../../../Shared";
+import { generateKeyPair, hashPassword, stringHexToBytes, type ApiErrorResponse, type TokensTypes } from "../../../shared";
 
 export function useLoginForm() {
   const { login } = useAuthenticatedStore();

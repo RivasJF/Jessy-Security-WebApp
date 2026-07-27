@@ -1,5 +1,5 @@
-import type { UserApiTypes } from "../../../Shared";
-import type { TokensTypes } from "../../../Shared";
+import type { UserApiTypes } from "../../../shared";
+import type { TokensTypes } from "../../../shared";
 import api from "../../../lib/api";
 
 
