@@ -1,6 +1,6 @@
 import { ed25519 } from "@noble/curves/ed25519.js";
 import { bytesToHex, hexToBytes } from "@noble/curves/utils.js";
-import type { TokensTypes } from "../Types/Domain/auth/Token.types";
+import type { TokensTypes } from "../types/Domain/auth/Token.types";
 
 export async function generateKeyPair(secretKeyArray: string): Promise<TokensTypes.KeyPair> {
     const secretKeyBytes = hexToBytes(secretKeyArray);
