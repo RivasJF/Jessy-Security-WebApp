@@ -1,6 +1,7 @@
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
-import { useAuthenticatedStore } from "../Store/Authenticated.store";
-import type { TokensTypes } from "../Shared/Types/Domain/auth/Token.types";
+import { useAuthenticatedStore } from "../Auth/Store/Authenticated.store";
+import type { TokensTypes } from "../../Shared";
+
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api",

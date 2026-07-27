@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router'
-import TargetAdditionalInformation from '../../Features/Accounts/Components/TargetAdditionalInformation'
-import { useGetInfoAccount } from '../../Features/Accounts/Hooks/InforAccount.hook'
+import { TargetAdditionalInformation, useGetInfoAccount } from '../../Features'
 
 export default function InfoAccount() {
     const navigate = useNavigate()

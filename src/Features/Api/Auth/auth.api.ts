@@ -1,5 +1,6 @@
-import type { TokensTypes } from "../../Shared/Types/Domain/auth/Token.types";
-import type { UserApiTypes } from "../../Shared/Types/Domain/auth/User-api.types";
+
+import type { TokensTypes } from "../../../Shared/Types/Domain/auth/Token.types";
+import type { UserApiTypes } from "../../../Shared/Types/Domain/auth/User-api.types";
 import api from "../api";
 
 const API_BASE_URL = "/auth";

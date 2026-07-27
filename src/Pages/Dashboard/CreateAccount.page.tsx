@@ -1,7 +1,5 @@
-import { useFormAccount } from "../../Features/Accounts/Hooks/FormAccount.hook";
-import { AdditionalInformationType } from "../../Shared/Types/Domain/account/AditionaInformation.type";
-import { CategoryAccount } from "../../Shared/Types/Domain/account/CategoryAccount.type";
-
+import { useFormAccount } from "../../Features";
+import { type AdditionalInformationType, type CategoryAccount } from "../../Shared";
 
 export default function FormAccount() {
   const { fields, append, remove, register, handleSubmit, onSubmit, errors } =

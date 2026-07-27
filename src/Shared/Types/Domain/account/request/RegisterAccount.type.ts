@@ -9,7 +9,7 @@ export type RegisterAccount = {
     additionalInformation: AdditionalInformation[];
 }
 
-export type AdditionalInformation = {
+type AdditionalInformation = {
     type: AdditionalInformationType;
     value: string;
     key: string;

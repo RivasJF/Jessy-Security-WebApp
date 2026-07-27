@@ -1,7 +1,7 @@
-import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
+import { useAuthenticatedStore } from "../../Auth/Store/Authenticated.store";
 import { useState } from "react";
 import { decryptAdditionalInformation } from "../Services/Encriptyng.service";
-import type { AdditionalInformation } from "../../../Shared/Types/Domain/account/request/RegisterAccount.type";
+import type { AdditionalInformation } from "../../../Shared";
 
 export default function TargetAdditionalInformation({
   data,

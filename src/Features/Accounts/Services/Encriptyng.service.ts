@@ -1,7 +1,4 @@
-import { decript, encript, generateNounce } from "../../../Shared/Encoder/cypher";
-import { bytesToHexString } from "../../../Shared/Encoder/Format";
-import type { AdditionalInformationType } from "../../../Shared/Types/Domain/account/AditionaInformation.type";
-import type { AdditionalInformation } from "../../../Shared/Types/Domain/account/request/RegisterAccount.type";
+import { bytesToHexString, decript, encript, generateNounce, type AdditionalInformation, type AdditionalInformationType } from "../../../Shared";
 import type { AdditionalInformationInput } from "../types/InputFormAccounr";
 
 /*

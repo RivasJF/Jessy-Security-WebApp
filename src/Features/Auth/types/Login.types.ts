@@ -1,4 +1,4 @@
-import type { TokensTypes } from "../../../Shared/Types/Domain/auth/Token.types";
+import type { TokensTypes } from "../../../Shared";
 
 export namespace LoginTypes {
     export type LoginFormData = {

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { fetchRegisterUser } from "../../../Api/Auth/auth.api";
-import type { UserApiTypes } from "../../../Shared/Types/Domain/auth/User-api.types";
+import { fetchRegisterUser } from "../../Api/Auth/auth.api";
 import type { AxiosError } from "axios";
-import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
-import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
+import { useAuthenticatedStore } from "../Store/Authenticated.store";
 import { generateAccessKeyRegister, type AccessKeyRegister } from "../service/hashing.service";
+import type { ApiErrorResponse, UserApiTypes } from "../../../Shared";
 
 export function useRegisterForm() {
   const { login } = useAuthenticatedStore();

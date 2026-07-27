@@ -1,11 +1,10 @@
 import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
-import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
-import type { AdditionalInformation, RegisterAccount } from "../../../Shared/Types/Domain/account/request/RegisterAccount.type";
-import { registerAccount } from "../../../Api/Account/account.v1";
-import type { ApiErrorResponse } from "../../../Shared/Types/Api/ApiErrorResponse.dto";
+import { useAuthenticatedStore } from "../../Auth/Store/Authenticated.store";
+import { registerAccount } from "../../Api/Account/account.v1";
 import type { AxiosError } from "axios";
 import { encryptAdditionalInformation } from "../Services/Encriptyng.service";
 import type { Inputs } from "../types/InputFormAccounr";
+import type { AdditionalInformation, ApiErrorResponse, RegisterAccount } from "../../../Shared";
 
 
 

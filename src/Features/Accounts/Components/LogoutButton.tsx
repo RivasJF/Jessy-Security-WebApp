@@ -1,4 +1,4 @@
-import { useAuthenticatedStore } from "../../../Store/Authenticated.store";
+import { useAuthenticatedStore } from "../../Auth/Store/Authenticated.store";
 import { ImEnter } from "react-icons/im";
 
 export default function LogoutButton() {
