@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { fetchRegisterUser } from "../../Api/Auth/auth.api";
+import { fetchRegisterUser } from "../api/auth.api";
 import type { AxiosError } from "axios";
-import { useAuthenticatedStore } from "../Store/Authenticated.store";
+import { useAuthenticatedStore } from "../store/Authenticated.store";
 import { generateAccessKeyRegister, type AccessKeyRegister } from "../service/hashing.service";
 import type { ApiErrorResponse, UserApiTypes } from "../../../Shared";
 

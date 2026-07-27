@@ -12,5 +12,5 @@ export type { UserApiTypes } from "./Types/Domain/auth/User-api.types";
 export type { AccountListResponse } from "./Types/Domain/account/response/AccountListResponse.type";
 export type { AccountResponse, AdditionalInformation } from "./Types/Domain/account/response/AccountResponse.type";
 export type { RegisterAccount } from "./Types/Domain/account/request/RegisterAccount.type";
-export type { AdditionalInformationType } from "./Types/Domain/account/AditionaInformation.type";
-export type { CategoryAccount } from "./Types/Domain/account/CategoryAccount.type";
+export { AdditionalInformationType } from "./Types/Domain/account/AditionaInformation.type";
+export { CategoryAccount } from "./Types/Domain/account/CategoryAccount.type";

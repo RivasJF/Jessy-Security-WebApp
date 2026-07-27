@@ -1,6 +1,6 @@
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
-import { useAuthenticatedStore } from "../Auth/Store/Authenticated.store";
-import type { TokensTypes } from "../../Shared";
+import type { TokensTypes } from "../Shared";
+import { useAuthenticatedStore } from "../Features";
 
 
 const api = axios.create({

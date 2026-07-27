@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAuthenticatedStore } from "../Store/Authenticated.store";
+import { useAuthenticatedStore } from "../store/Authenticated.store";
 import type { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import type { LoginTypes } from "../types/Login.types";
-import { fetchLoginUser, fetchSalt } from "../../Api/Auth/auth.api";
+import { fetchLoginUser, fetchSalt } from "../api/auth.api";
 import { generateKeyPair, hashPassword, stringHexToBytes, type ApiErrorResponse, type TokensTypes } from "../../../Shared";
 
 export function useLoginForm() {
