@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import ProtectedRouter from "./protected.router";
 import { Login, Register } from "../pages/auth";
-import { Dashboard, FormAccount, InfoAccount } from "../pages/Dashboard";
+import { Dashboard, FormAccount, InfoAccountPage } from "../pages/Dashboard";
 import Home from "../pages/Home/Home";
 
 const ROUTER = createBrowserRouter([
@@ -30,7 +30,7 @@ const ROUTER = createBrowserRouter([
       },
       {
         path: "/account/:id",
-        Component: InfoAccount,
+        Component: InfoAccountPage,
       }
     ],
   },

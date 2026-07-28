@@ -1,12 +1,25 @@
 import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import { registerAccount } from "../api/account.v1";
 import type { AxiosError } from "axios";
-import type { Inputs } from "../types/InputFormAccounr";
-import type { AdditionalInformation, ApiErrorResponse, RegisterAccount } from "../../../shared";
+import type { ApiErrorResponse } from "../../../shared";
 import { useAuthenticatedStore } from "../../auth/store/Authenticated.store";
 import { encryptAdditionalInformation } from "../services/Encriptyng.service";
+import type { CategoryAccount } from "../types/CategoryAccount.type";
+import type { AdditionalInformation, RegisterAccountRequest } from "../types/AccountListResponse.type";
 
 
+type Inputs = {
+  title: string;
+  username: string;
+  description: string;
+  category: CategoryAccount;
+  additionalInformation: AdditionalInformationInput[];
+};
+
+export type AdditionalInformationInput = {
+  type: string;
+  value: string;
+};
 
 export const useFormAccount = () => {
     const {privateKey} = useAuthenticatedStore();
@@ -25,7 +38,7 @@ export const useFormAccount = () => {
     //encritar datos
 
     const additionalInformation: AdditionalInformation[] = encryptAdditionalInformation(data.additionalInformation, privateKey);
-    const payload: RegisterAccount = {
+    const payload: RegisterAccountRequest = {
       title: data.title,
       username: data.username,
       description: data.description,
@@ -50,7 +63,7 @@ export const useFormAccount = () => {
 };
 
 
-async function save(payload:RegisterAccount) {
+async function save(payload:RegisterAccountRequest) {
   try {
         const response = await registerAccount(payload);
         console.log("Account registered successfully:", response);

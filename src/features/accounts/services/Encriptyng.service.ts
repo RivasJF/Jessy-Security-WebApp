@@ -1,5 +1,7 @@
-import { bytesToHexString, decript, encript, generateNounce, type AdditionalInformation, type AdditionalInformationType } from "../../../shared";
-import type { AdditionalInformationInput } from "../types/InputFormAccounr";
+import { bytesToHexString, decript, encript, generateNounce } from "../../../shared";
+import type { AdditionalInformationInput } from "../hooks/useFormAccount.hook";
+import type { AdditionalInformation } from "../types/AccountListResponse.type";
+import type { AdditionalInformationType } from "../types/AditionaInformation.type";
 
 /*
 privateKey: string private key in hex format from 32 bytes

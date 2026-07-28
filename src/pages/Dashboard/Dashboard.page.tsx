@@ -1,14 +1,8 @@
 import { NavLink } from "react-router";
-import { LogoutButton, TargetAccount, useGetListAccounts } from "../../features";
+import { DashboardAccount, LogoutButton } from "../../features";
 import { HomeButton } from "../../shared";
 
 export default function Dashboard() {
-  const {
-    data: accountArray,
-    isLoading,
-    error,
-    isSuccess,
-  } = useGetListAccounts();
   
   return (
     <div className="flex flex-col items-center min-h-screen min-w-screen">
@@ -20,23 +14,7 @@ export default function Dashboard() {
         <hr className="border-t border-gray-300 " />
       </header>
       {/* panel grid */}
-      <section className="w-full max-w-max px-4 py-6">
-        {isLoading && <p>Loading accounts...</p>}
-        {error && <p>Error loading accounts</p>}
-        {isSuccess && (
-          <>
-            {accountArray.length === 0 ? (
-              <p className="text-center text-gray-400">No accounts found.</p>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-8 md:grid-cols-3 gap-5">
-                {accountArray.map((acc) => (
-                  <TargetAccount key={acc.id} account={acc} />
-                ))}
-              </div>
-            )}
-          </>
-        )}
-      </section>
+      <DashboardAccount />
 
       <div className="fixed top-4 right-4">
         <LogoutButton />
