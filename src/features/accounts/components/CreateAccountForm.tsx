@@ -1,5 +1,6 @@
-import { AdditionalInformationType, CategoryAccount } from "../../../shared";
 import { useFormAccount } from "../hooks/useFormAccount.hook";
+import { AdditionalInformationType } from "../types/AditionaInformation.type";
+import { CategoryAccount } from "../types/CategoryAccount.type";
 
 function CreateAccountForm() {
   const { fields, append, remove, register, handleSubmit, onSubmit, errors } =
