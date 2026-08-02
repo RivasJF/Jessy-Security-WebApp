@@ -1,18 +1,18 @@
 import { useAuthenticatedStore } from "../../auth/store/Authenticated.store";
 import { useState } from "react";
 import { decryptAdditionalInformation } from "../services/Encriptyng.service";
-import type { AdditionalInformation } from "../types/AccountListResponse.type";
+import type { AdditionalInformationResponse } from "../types/AccountListResponse.type";
 
 export default function TargetAdditionalInformation({
   data,
 }: {
-  data: AdditionalInformation;
+  data: AdditionalInformationResponse;
 }) {
   const { privateKey } = useAuthenticatedStore();
 
   const [decryptedValue, setDecryptedValue] = useState<string | null>(null);
 
-  function handleDecrypt(data: AdditionalInformation) {
+  function handleDecrypt(data: AdditionalInformationResponse) {
     if (decryptedValue !== null) {
       setDecryptedValue(null);
       return;

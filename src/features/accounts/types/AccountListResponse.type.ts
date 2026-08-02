@@ -15,7 +15,14 @@ export type AccountResponse = {
     username: string;
     description: string;
     category: string;
-    additionalInformation: AdditionalInformation[];
+    additionalInformation: AdditionalInformationResponse[];
+}
+
+export type AdditionalInformationResponse = {
+    id: string;
+    type: AdditionalInformationType;
+    value: string;
+    key: string;
 }
 
 export type AdditionalInformation = {

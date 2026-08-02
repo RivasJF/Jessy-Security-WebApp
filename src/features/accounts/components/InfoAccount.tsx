@@ -24,8 +24,8 @@ export default function InfoAccount() {
             <h2 className="text-2xl font-bold">{data.title}</h2>
             <p className="text-lg">Username: {data.username}</p>
             <p className="text-lg">Description: {data.description}</p>
-            {data.additionalInformation.map((info, index) => (
-              <TargetAdditionalInformation key={index} data={info} />
+            {data.additionalInformation.map((info) => (
+              <TargetAdditionalInformation key={info.id} data={info} />
             ))}
           </div>
         </>
