@@ -1,5 +1,5 @@
 import api from "../../../lib/api";
-import type { AccountListResponse, AccountResponse, RegisterAccountRequest } from "../types/AccountListResponse.type";
+import type { AccountListResponse, AccountResponse, RegisterAccountRequest, UpdateAccountRequest } from "../types/AccountListResponse.type";
 
 const API_BASE_URL = "/accounts";
 
@@ -15,5 +15,10 @@ export const registerAccount = async (payload: RegisterAccountRequest): Promise<
 
 export const fetchAccountById = async (id: string): Promise<AccountResponse> => {
     const response = await api.get<AccountResponse>(`${API_BASE_URL}/${id}`);
+    return response.data;
+}
+
+export const updateAccount = async (payload: UpdateAccountRequest): Promise<AccountResponse> => {
+    const response = await api.patch<AccountResponse>(`${API_BASE_URL}/update`, payload);
     return response.data;
 }

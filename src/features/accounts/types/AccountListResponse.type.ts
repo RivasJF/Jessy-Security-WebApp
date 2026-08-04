@@ -44,3 +44,20 @@ interface AdditionalInformationRequest {
     value: string;
     key: string;
 }
+
+export type UpdateAccountRequest = {
+    id: string;
+    title?: string;
+    username?: string;
+    description?: string;
+    category?: CategoryAccount;
+    additionalInformation?: UpdateAdditionalInformationRequest[];
+}
+
+export type UpdateAdditionalInformationRequest = {
+  id?: string;
+  deleted?: true;
+  type?: AdditionalInformationType;
+  value?: string;
+  key?: string;
+};

@@ -23,8 +23,6 @@ export function useLoginForm() {
     password: "",
   });
 
-  const [error, setError] = useState<string | null>(null);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -54,25 +52,16 @@ export function useLoginForm() {
       // to stored
       login(keys.secretKey, token.access_token);
     },
-
-    onError: (error: AxiosError<ApiErrorResponse>) => {
-      const errorApi = error as AxiosError<ApiErrorResponse>;
-      const status = errorApi.response?.status;
-      if (status == 401) {
-        setError(
-          "Credenciales invalidas. Por favor, verifica tu correo electrónico y contraseña.",
-        );
-      } else {
-        setError(
-          "Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.",
-        );
-      }
-    },
   });
+
+  const errorMessage = loginMutation.error
+      ? loginMutation.error.response?.status === 401
+        ? "Credenciales inválidas. Por favor, verifica tu correo electrónico y contraseña."
+        : "Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo más tarde."
+      : null;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
     loginMutation.mutate(formData);
   };
 
@@ -80,7 +69,7 @@ export function useLoginForm() {
     formData,
     handleChange,
     handleSubmit,
-    error,
+    error: errorMessage,
     isLoading: loginMutation.isPending,
   };
 }
