@@ -3,6 +3,7 @@ import ProtectedRouter from "./protected.router";
 import { Login, Register } from "../pages/auth";
 import { Dashboard, FormAccount, InfoAccountPage } from "../pages/Dashboard";
 import Home from "../pages/Home/Home";
+import { EditAccountPage } from "../pages/acconts";
 
 const ROUTER = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const ROUTER = createBrowserRouter([
       {
         path: "/create-account",
         Component: FormAccount,
+      },
+      {
+        path: "/edit-account/:id",
+        Component: EditAccountPage,
       },
       {
         path: "/account/:id",

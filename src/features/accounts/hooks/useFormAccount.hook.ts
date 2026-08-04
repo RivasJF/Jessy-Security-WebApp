@@ -45,7 +45,7 @@ export const useFormAccount = () => {
       category: data.category,
       additionalInformation: additionalInformation,
     };
-  
+
     // Aquí puedes realizar la llamada a la API para registrar la cuenta con el payload encriptado
     const response = await save(payload);
     console.log("Response from API:", response);
