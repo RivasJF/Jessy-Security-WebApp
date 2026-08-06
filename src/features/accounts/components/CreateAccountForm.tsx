@@ -1,10 +1,29 @@
-import { useFormAccount } from "../hooks/useFormAccount.hook";
+import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import { AdditionalInformationType } from "../types/AditionaInformation.type";
 import { CategoryAccount } from "../types/CategoryAccount.type";
+import type { AccountCreateInput } from "../types/account.types";
+import { useAccountForm } from "../hooks/useFormAccount.hook";
 
 function CreateAccountForm() {
-  const { fields, append, remove, register, handleSubmit, onSubmit, errors } =
-    useFormAccount();
+  const { registerAccountFn, isLoading, isError, error } =
+    useAccountForm();
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AccountCreateInput>();
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "additionalInformation",
+  });
+
+  const onSubmit: SubmitHandler<AccountCreateInput> = (data) => {
+     registerAccountFn(data);
+   };
+
+
   return (
     <form className="space-y-6 text-black" onSubmit={handleSubmit(onSubmit)}>
       <div>
@@ -105,6 +124,8 @@ function CreateAccountForm() {
           Create Account
         </button>
       </div>
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Error: {error?.response?.data.message}</div>}
     </form>
   );
 }
