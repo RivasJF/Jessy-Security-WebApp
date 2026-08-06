@@ -1,8 +1,25 @@
+import { useState } from "react";
 import { useLoginForm } from "../hooks/useLoginForm";
+import type { LoginFormData } from "../types/api.types";
 
 export default function LoginForm() {
-  const { formData, handleChange, handleSubmit, error, isLoading } =
+  const {  error, isLoading, loginFn } =
     useLoginForm();
+  const [formData, setFormData] = useState<LoginFormData>({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    loginFn(formData);
+  };
+
   return (
     <>
       <form className="space-y-6" onSubmit={handleSubmit}>
