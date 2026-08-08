@@ -27,6 +27,11 @@ export default function InfoAccount() {
             {data.additionalInformation.map((info) => (
               <TargetAdditionalInformation key={info.id} data={info} />
             ))}
+            <button
+              onClick={() => navigate(`/edit-account/${id}`, { state: { account: data } })}
+            >
+              Edit
+            </button>
           </div>
         </>
       )}

@@ -1,5 +1,6 @@
 import api from "../../../lib/api";
-import type { AccountListResponse, AccountResponse, RegisterAccountRequest, UpdateAccountRequest } from "../types/AccountListResponse.type";
+import type { UpdateAccountRequest } from "../types/account.types";
+import type { AccountListResponse, AccountResponse, RegisterAccountRequest } from "../types/AccountListResponse.type";
 
 const API_BASE_URL = "/accounts";
 
