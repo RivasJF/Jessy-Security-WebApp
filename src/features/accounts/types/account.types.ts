@@ -41,9 +41,9 @@ export type UpdateAccountRequest = {
 }
 
 export type UpdateAdditionalInformationRequest = {
-  id?: string;
-  deleted?: true | null;
-  type?: AdditionalInformationType | null;
-  value?: string | null;
-  key?: string | null;
+  id: string | null;
+  deleted: true | null;
+  type: AdditionalInformationType | null;
+  value: string | null;
+  key: string | null;
 };

@@ -24,7 +24,6 @@ export default function InputDecript(
 
 
   function handleDecrypt(data: AdditionalInformationEditInput) {
-    console.log("Decrypting data:", data);
     if (data.key != "" && privateKey != null && !changed) {
       const res = decryptAdditionalInformation(data, privateKey);
       setDecryptedValue(res);

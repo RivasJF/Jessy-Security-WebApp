@@ -2,17 +2,17 @@ import type { AxiosError } from "axios";
 import type { ApiErrorResponse } from "../../../shared";
 import type { AccountResponse } from "../types/AccountListResponse.type";
 import { useMutation } from "@tanstack/react-query";
-import type { UpdateAccountRequest } from "../types/account.types";
+import type { AccountEditInput } from "../types/account.types";
 import { updateAccountService } from "../services/updateAccountService";
 
 
-export const useAccountUpdate = () => {
+export const useAccountUpdate = (current: AccountResponse) => {
   const accountMutation = useMutation<
     AccountResponse,
     AxiosError<ApiErrorResponse>,
-    UpdateAccountRequest
+    AccountEditInput
   >({
-    mutationFn: updateAccountService,
+    mutationFn: (update) => updateAccountService(update, current),
     onSuccess: () => {
       alert("Account update successfully");
     },

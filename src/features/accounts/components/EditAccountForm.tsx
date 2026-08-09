@@ -4,11 +4,12 @@ import { CategoryAccount } from "../types/CategoryAccount.type";
 import { useParams } from "react-router";
 import { useGetInfoAccount } from "../hooks/InforAccount.hook";
 import TargetEditAdditionalInformation from "./TargetEditAdditionalInformation";
-
+import { useAccountUpdate } from "../hooks/useAccountUpdate.hook";
 
 export default function ComponentName() {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading, isError, error } = useGetInfoAccount(id || "");
+  const { data } = useGetInfoAccount(id || "");
+  const { isLoading, isError, error,  updateAccountFn } = useAccountUpdate(data!);
 
   const {
     control,
@@ -22,24 +23,27 @@ export default function ComponentName() {
       username: data?.username,
       description: data?.description,
       category: data?.category as CategoryAccount,
-      additionalInformation: data?.additionalInformation.map((add) => {
-        return {
-          id: add.id,
-          type: add.type,
-          value: add.value,
-          key: add.key,
-        }
-      }) ?? [],
+      additionalInformation:
+        data?.additionalInformation.map((add) => {
+          return {
+            id: add.id,
+            type: add.type,
+            value: add.value,
+            key: add.key,
+          };
+        }) ?? [],
     },
   });
 
   const onSubmit = (dataSubmit: AccountEditInput) => {
-    console.log(data)
-      console.log("Payload to submit:", dataSubmit);
+    updateAccountFn(dataSubmit);
   };
 
   return (
-    <form className="space-y-6 text-black bg-amber-50 p-5 rounded-md shadow-md" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="space-y-6 text-black bg-amber-50 p-5 rounded-md shadow-md"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div>
         <label htmlFor="title">Title</label>
         {errors.title && (
@@ -89,12 +93,13 @@ export default function ComponentName() {
 
       {/* Additional Information Fields */}
 
-      {data?.additionalInformation && <TargetEditAdditionalInformation
-        control={control}
-        register={register}
-        setValue={setValue}
-      />
-      }
+      {data?.additionalInformation && (
+        <TargetEditAdditionalInformation
+          control={control}
+          register={register}
+          setValue={setValue}
+        />
+      )}
 
       <div>
         <button
