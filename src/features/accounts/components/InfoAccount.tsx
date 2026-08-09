@@ -1,6 +1,7 @@
 import { useGetInfoAccount } from "../hooks/InforAccount.hook";
 import { useNavigate, useParams } from "react-router";
 import TargetAdditionalInformation from "./TargetAdditionalInformation";
+import DeleteButtonAccount from "./DeleteButton";
 
 export default function InfoAccount() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export default function InfoAccount() {
             >
               Edit
             </button>
+            <DeleteButtonAccount id={id!} />
           </div>
         </>
       )}

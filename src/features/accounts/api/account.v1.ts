@@ -23,3 +23,8 @@ export const updateAccount = async (payload: UpdateAccountRequest): Promise<Acco
     const response = await api.patch<AccountResponse>(`${API_BASE_URL}/update`, payload);
     return response.data;
 }
+
+export const fetchDeleteById = async (id: string): Promise<void> => {
+    const response = await api.delete<void>(`${API_BASE_URL}/delete/${id}`);
+    return response.data;
+}
