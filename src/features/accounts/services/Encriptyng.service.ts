@@ -1,5 +1,5 @@
 import { bytesToHexString, decript, encript, generateNounce } from "../../../shared";
-import type { AdditionalInformationInput } from "../types/account.types";
+import type { AdditionalInformationEditInput, AdditionalInformationInput } from "../types/account.types";
 import type { AdditionalInformation } from "../types/AccountListResponse.type";
 import type { AdditionalInformationType } from "../types/AditionaInformation.type";
 
@@ -21,7 +21,7 @@ export function encryptAdditionalInformation(additionalInformation: AdditionalIn
 }
 
 
-export function decryptAdditionalInformation(encryptedInformation: AdditionalInformation, privateKey: string): string {
+export function decryptAdditionalInformation(encryptedInformation: AdditionalInformation | AdditionalInformationEditInput, privateKey: string): string {
     const res = decript(encryptedInformation.value, privateKey, encryptedInformation.key);
     return res;
 }

@@ -15,16 +15,20 @@ export type AdditionalInformationInput = {
 };
 
 export type AccountEditInput = {
+  id: string;
   title: string;
   username: string;
   description: string;
   category: CategoryAccount;
-  additionalInformation: AdditionalInformationInput[];
+  additionalInformation: AdditionalInformationEditInput[];
 };
 
 export type AdditionalInformationEditInput = {
-  type: string;
+  id?: string;
+  deleted?: true;
+  type: AdditionalInformationType | null;
   value: string;
+  key: string;
 };
 
 export type UpdateAccountRequest = {
