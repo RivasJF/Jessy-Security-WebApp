@@ -132,6 +132,26 @@ pnpm install
 pnpm dev
 ```
 
+## Docker
+
+Construye la imagen de producción:
+
+```bash
+docker build -t jessy-security-webapp .
+```
+
+Ejecuta el contenedor indicando la URL del backend:
+
+```bash
+docker run --rm -p 8080:80 \
+  -e VITE_API_BASE_URL=http://localhost:3000/api \
+  jessy-security-webapp
+```
+
+La aplicación estará disponible en `http://localhost:8080`. La URL se
+inyecta al iniciar el contenedor, por lo que no es necesario reconstruir la
+imagen para cambiar de backend.
+
 ## Comandos Disponibles
 
 | Comando       | Descripción                     |

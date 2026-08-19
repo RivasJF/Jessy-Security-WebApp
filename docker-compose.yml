@@ -1,0 +1,9 @@
+services:
+  web:
+    image: jessy-security-webapp:latest
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    environment:
+      VITE_API_BASE_URL: "${VITE_API_BASE_URL:-http://host.docker.internal:3000/api}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
