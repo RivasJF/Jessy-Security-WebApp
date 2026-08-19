@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateSalt, hashPassword } from "../../Shared/Encoder/hash";
+import { generateSalt, hashPassword } from "../../shared";
 
 describe("Hash", () => {
   it("should generate a salt", () => {

@@ -48,7 +48,7 @@ export function updateAccountService(
         const newAdd = encryptAdditionalInformationInputNew(add, privateKey);
         return {
           id: null,
-          delete: null,
+          deleted: null,
           type: add.type,
           value: newAdd.value,
           key: newAdd.key,
@@ -64,7 +64,7 @@ export function updateAccountService(
         const encrypted = encryptAdditionalInformationInput(add, privateKey);
         return {
           id: add.id,
-          delete: null,
+          deleted: null,
           type: null,
           value: encrypted.value,
           key: null,
@@ -74,14 +74,13 @@ export function updateAccountService(
       if (typeChanged) {
         return {
           id: null,
-          delete: null,
+          deleted: null,
           type: add.type,
           value: null,
           key: null,
         };
       }
       return null;
-
     })
     .filter((item) => item !== null),
   };
